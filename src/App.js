@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
 
-class App extends Component {
-  render() {
+const App = () => {
+    const loginWithSpotify = () => {
+        const scopes = 'playlist-modify-public';
+
+        window.location.replace(
+            `https://accounts.spotify.com/authorize?client_id=453ef47ef0c24a63a38a91b855d9c9b3&redirect_uri=${encodeURIComponent(
+                window.location.href
+            )}&scope=${encodeURIComponent(scopes)}&response_type=token`
+        );
+    };
+
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+        <div className="App">
+            <button onClick={loginWithSpotify}>Login with Spotify</button>
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
     );
-  }
-}
+};
 
 export default App;
