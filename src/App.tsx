@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-const App = () => {
+function App() {
     const loginWithSpotify = () => {
         const scopes = 'playlist-modify-public';
 
@@ -20,6 +20,6 @@ const App = () => {
             <button onClick={loginWithSpotify}>Login with Spotify</button>
         </div>
     );
-};
+}
 
 export default App;
