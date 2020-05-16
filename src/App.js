@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const App = () => {
     const loginWithSpotify = () => {
@@ -10,6 +10,10 @@ const App = () => {
             )}&scope=${encodeURIComponent(scopes)}&response_type=token`
         );
     };
+
+    useEffect(() => {
+        console.log('load');
+    }, []);
 
     return (
         <div className="App">
