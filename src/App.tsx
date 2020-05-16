@@ -1,6 +1,12 @@
 import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setToken } from './store/appSlice';
+import { RootState } from './store/reducers';
 
 function App() {
+    const dispatch = useDispatch();
+    const { token } = useSelector((state: RootState) => state.app);
+
     const loginWithSpotify = () => {
         const scopes = 'playlist-modify-public';
 
@@ -12,12 +18,18 @@ function App() {
     };
 
     useEffect(() => {
-        console.log('load');
-    }, []);
+        if (!token && window.location.hash) {
+            dispatch(setToken(window.location.hash));
+        }
+    }, [dispatch, token]);
 
     return (
         <div className="App">
-            <button onClick={loginWithSpotify}>Login with Spotify</button>
+            {token ? (
+                <p>Logged in</p>
+            ) : (
+                <button onClick={loginWithSpotify}>Login with Spotify</button>
+            )}
         </div>
     );
 }

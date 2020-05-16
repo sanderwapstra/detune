@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
+import App from './App';
+import * as serviceWorker from './serviceWorker';
 import { persistor, store } from './store/store';
 
 ReactDOM.render(
