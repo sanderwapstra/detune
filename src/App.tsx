@@ -3,13 +3,15 @@ import queryString from 'query-string';
 import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import SpotifyWebApi from 'spotify-web-api-js';
-import { setToken, setUser } from './store/appSlice';
+import { setToken, setUser, setGenres } from './store/appSlice';
 import { RootState } from './store/reducers';
 
 function App() {
     const spotifyApi = useRef(new SpotifyWebApi());
     const dispatch = useDispatch();
-    const { token, user } = useSelector((state: RootState) => state.app);
+    const { token, user, genres } = useSelector(
+        (state: RootState) => state.app
+    );
 
     const loginWithSpotify = () => {
         const scopes = 'playlist-modify-public';
@@ -64,7 +66,7 @@ function App() {
     useEffect(() => {
         (async () => {
             if (token) {
-                let err, user;
+                let err, user, genres;
 
                 spotifyApi.current.setAccessToken(token);
 
@@ -77,6 +79,18 @@ function App() {
                 if (user) {
                     dispatch(setUser(user));
                 }
+
+                [err, genres] = await to(
+                    spotifyApi.current.getAvailableGenreSeeds()
+                );
+
+                if (err) {
+                    console.error(`Something went wrong: ${err}`);
+                }
+
+                if (genres) {
+                    dispatch(setGenres(genres.genres));
+                }
             }
         })();
     }, [dispatch, token]);
@@ -87,6 +101,15 @@ function App() {
                 <>
                     <h1>Hi, {user.display_name}</h1>
                     <button onClick={createPlaylist}>Create playlist</button>
+                    {genres && (
+                        <select>
+                            {genres.map((genre, i) => (
+                                <option value={genre} key={i}>
+                                    {genre}
+                                </option>
+                            ))}
+                        </select>
+                    )}
                 </>
             ) : (
                 <button onClick={loginWithSpotify}>Login with Spotify</button>
