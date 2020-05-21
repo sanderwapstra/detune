@@ -5,13 +5,64 @@ import { useDispatch, useSelector } from 'react-redux';
 import SpotifyWebApi from 'spotify-web-api-js';
 import { setToken, setUser, setGenres } from './store/appSlice';
 import { RootState } from './store/reducers';
+import { useForm } from 'react-hook-form';
 
 function App() {
-    const spotifyApi = useRef(new SpotifyWebApi());
     const dispatch = useDispatch();
+    const spotifyApi = useRef(new SpotifyWebApi());
     const { token, user, genres } = useSelector(
         (state: RootState) => state.app
     );
+    const { register, handleSubmit, errors } = useForm();
+
+    const onSubmit = async data => {
+        console.log(data);
+        let err, results: any, track, trackFeatures, trackAnalysis, artist;
+
+        console.log('data.artist :>> ', data.artist);
+
+        [err, results] = await to(
+            spotifyApi.current.search(data.artist, ['artist'])
+        );
+
+        if (err) {
+            console.error(`Something went wrong: ${err}`);
+        }
+
+        if (results) {
+            console.log('results :>> ', results);
+
+            [err, artist] = await to(
+                spotifyApi.current.getArtist(
+                    results.tracks.items[0].artists[0].id
+                )
+            );
+
+            [err, track] = await to(
+                spotifyApi.current.getTrack(results.tracks.items[0].id)
+            );
+
+            [err, trackFeatures] = await to(
+                spotifyApi.current.getAudioFeaturesForTrack(
+                    results.tracks.items[0].id
+                )
+            );
+
+            [err, trackAnalysis] = await to(
+                spotifyApi.current.getAudioAnalysisForTrack(
+                    results.tracks.items[0].id
+                )
+            );
+
+            console.log('artist :>> ', artist);
+
+            console.log('trackFeatures :>> ', trackFeatures);
+
+            console.log('track :>> ', track);
+
+            console.log('track :>> ', trackAnalysis);
+        }
+    };
 
     const loginWithSpotify = () => {
         const scopes = 'playlist-modify-public';
@@ -49,6 +100,7 @@ function App() {
         }
     };
 
+    // Save token after first login
     useEffect(() => {
         if (!token && window.location.hash) {
             const parsedHash = queryString.parse(window.location.hash);
@@ -63,36 +115,49 @@ function App() {
         }
     }, [dispatch, token]);
 
+    // Set access token after getting token
+    // Save user info to Redux
+    // Get available genres for recommendations
     useEffect(() => {
-        (async () => {
-            if (token) {
-                let err, user, genres;
+        const setAccessToken = () => {
+            spotifyApi.current.setAccessToken(token);
+        }
 
-                spotifyApi.current.setAccessToken(token);
+        const getUser = async () => {
+            let err, user;
 
-                [err, user] = await to(spotifyApi.current.getMe());
+            [err, user] = await to(spotifyApi.current.getMe());
 
-                if (err) {
-                    console.error(`Something went wrong: ${err}`);
-                }
-
-                if (user) {
-                    dispatch(setUser(user));
-                }
-
-                [err, genres] = await to(
-                    spotifyApi.current.getAvailableGenreSeeds()
-                );
-
-                if (err) {
-                    console.error(`Something went wrong: ${err}`);
-                }
-
-                if (genres) {
-                    dispatch(setGenres(genres.genres));
-                }
+            if (err) {
+                console.error(`Something went wrong: ${err}`);
             }
-        })();
+
+            if (user) {
+                dispatch(setUser(user));
+            }
+        }
+
+        const getGenres = async () => {
+            let err, genres;
+
+            [err, genres] = await to(
+                spotifyApi.current.getAvailableGenreSeeds()
+            );
+
+            if (err) {
+                console.error(`Something went wrong: ${err}`);
+            }
+
+            if (genres) {
+                dispatch(setGenres(genres.genres));
+            }
+        }
+
+        if (token) {
+            setAccessToken();
+            getUser();
+            getGenres();
+        }
     }, [dispatch, token]);
 
     return (
@@ -110,6 +175,26 @@ function App() {
                             ))}
                         </select>
                     )}
+
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                        <input
+                            type="text"
+                            placeholder="Artist"
+                            name="artist"
+                            ref={register({ required: true, maxLength: 80 })}
+                        />
+                        {errors.artist && "Artist is required"}
+
+                        <input
+                            type="text"
+                            placeholder="Track"
+                            name="track"
+                            ref={register({ required: true, maxLength: 80 })}
+                        />
+                        {errors.track && "Track is required"}
+
+                        <input type="submit" />
+                    </form>
                 </>
             ) : (
                 <button onClick={loginWithSpotify}>Login with Spotify</button>
