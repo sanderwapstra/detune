@@ -15,7 +15,7 @@ function App() {
     );
     const { register, handleSubmit, errors } = useForm();
 
-    const onSubmit = async data => {
+    const onSubmit = async (data: any) => {
         console.log(data);
         let err, results: any, track, trackFeatures, trackAnalysis, artist;
 
@@ -121,7 +121,7 @@ function App() {
     useEffect(() => {
         const setAccessToken = () => {
             spotifyApi.current.setAccessToken(token);
-        }
+        };
 
         const getUser = async () => {
             let err, user;
@@ -135,7 +135,7 @@ function App() {
             if (user) {
                 dispatch(setUser(user));
             }
-        }
+        };
 
         const getGenres = async () => {
             let err, genres;
@@ -151,7 +151,7 @@ function App() {
             if (genres) {
                 dispatch(setGenres(genres.genres));
             }
-        }
+        };
 
         if (token) {
             setAccessToken();
@@ -183,7 +183,7 @@ function App() {
                             name="artist"
                             ref={register({ required: true, maxLength: 80 })}
                         />
-                        {errors.artist && "Artist is required"}
+                        {errors.artist && 'Artist is required'}
 
                         <input
                             type="text"
@@ -191,7 +191,7 @@ function App() {
                             name="track"
                             ref={register({ required: true, maxLength: 80 })}
                         />
-                        {errors.track && "Track is required"}
+                        {errors.track && 'Track is required'}
 
                         <input type="submit" />
                     </form>
