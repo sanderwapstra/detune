@@ -100,6 +100,30 @@ function App() {
         }
     };
 
+    const getRecommendations = async () => {
+        let err, recommendations;
+
+        [err, recommendations] = await to(
+            spotifyApi.current.getRecommendations({
+                seed_artists: [
+                    '2AR42Ur9PcchQDtEdwkv4L',
+                    '5a0etAzO5V26gvlbmHzT9W',
+                    '7Eu1txygG6nJttLHbZdQOh',
+                    '5rZVjGkZZI4TnpMHQwrxfG',
+                    '15e0X6NuMsVuHi7AZhcfyI',
+                ],
+            })
+        );
+
+        if (err) {
+            console.error(`Something went wrong: ${err}`);
+        }
+
+        if (recommendations) {
+            console.log('recommendations :>> ', recommendations);
+        }
+    };
+
     // Save token after first login
     useEffect(() => {
         if (!token && window.location.hash) {
@@ -195,6 +219,9 @@ function App() {
 
                         <input type="submit" />
                     </form>
+                    <button onClick={getRecommendations}>
+                        Recommendations demo
+                    </button>
                 </>
             ) : (
                 <button onClick={loginWithSpotify}>Login with Spotify</button>
