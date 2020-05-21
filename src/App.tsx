@@ -98,6 +98,8 @@ function App() {
         if (playlist) {
             console.log('playlist :>> ', playlist);
         }
+
+        return playlist;
     };
 
     const getRecommendations = async () => {
@@ -120,7 +122,14 @@ function App() {
         }
 
         if (recommendations) {
-            console.log('recommendations :>> ', recommendations);
+            const playlist = await createPlaylist();
+
+            if (playlist) {
+                spotifyApi.current.addTracksToPlaylist(
+                    playlist.id,
+                    recommendations.tracks.map(track => track.uri)
+                );
+            }
         }
     };
 
@@ -189,7 +198,6 @@ function App() {
             {user ? (
                 <>
                     <h1>Hi, {user.display_name}</h1>
-                    <button onClick={createPlaylist}>Create playlist</button>
                     {genres && (
                         <select>
                             {genres.map((genre, i) => (
