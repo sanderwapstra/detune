@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
 import appReducer from './appSlice';
 import artistsReducer from './artistsSlice';
-import trackReducer from './trackSlice';
+import trackAttributesReducer from './trackAttributesSlice';
 
 const rootReducer = combineReducers({
     app: appReducer,
     artists: artistsReducer,
-    track: trackReducer,
+    trackAttributes: trackAttributesReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
