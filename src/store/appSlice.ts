@@ -3,7 +3,6 @@ import { createSlice } from '@reduxjs/toolkit';
 type SliceState = {
     token: string | null;
     user: SpotifyApi.UserObjectPublic | null;
-    artists: SpotifyApi.ArtistObjectFull[];
 };
 
 const appSlice = createSlice({
@@ -11,7 +10,6 @@ const appSlice = createSlice({
     initialState: {
         token: null,
         user: null,
-        artists: [],
     } as SliceState,
     reducers: {
         setToken: (state, action) => {
@@ -20,19 +18,9 @@ const appSlice = createSlice({
         setUser: (state, action) => {
             state.user = action.payload;
         },
-        addArtist: (state, action) => {
-            console.log('action.payload', action.payload);
-            state.artists.push(action.payload);
-        },
-        removeArtist(state, action) {
-            state.artists.splice(
-                state.artists.findIndex(artist => artist.id === action.payload),
-                1
-            );
-        },
     },
 });
 
-export const { setToken, setUser, addArtist, removeArtist } = appSlice.actions;
+export const { setToken, setUser } = appSlice.actions;
 
 export default appSlice.reducer;

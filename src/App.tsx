@@ -4,15 +4,15 @@ import React, { useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import SpotifyWebApi from 'spotify-web-api-js';
-import { addArtist, removeArtist, setToken, setUser } from './store/appSlice';
+import { setToken, setUser } from './store/appSlice';
+import { addArtist, removeArtist } from './store/artistsSlice';
 import { RootState } from './store/reducers';
 
 function App() {
     const dispatch = useDispatch();
     const spotifyApi = useRef(new SpotifyWebApi());
-    const { token, user, artists } = useSelector(
-        (state: RootState) => state.app
-    );
+    const artists = useSelector((state: RootState) => state.artists);
+    const { token, user } = useSelector((state: RootState) => state.app);
     const { register, handleSubmit, errors } = useForm();
 
     const onSubmit = async (data: any) => {
@@ -60,6 +60,24 @@ function App() {
         return playlist;
     };
 
+    const addTracksToPlaylist = async (
+        playlist: SpotifyApi.CreatePlaylistResponse,
+        recommendations: SpotifyApi.RecommendationsFromSeedsResponse
+    ) => {
+        const [err] = await to(
+            spotifyApi.current.addTracksToPlaylist(
+                playlist.id,
+                recommendations.tracks.map(track => track.uri)
+            )
+        );
+
+        if (err) {
+            console.error(`Something went wrong: ${err}`);
+        } else {
+            alert('Check your Spotify, a new playlist is ready!');
+        }
+    };
+
     const getRecommendations = async () => {
         if (!artists.length) return;
 
@@ -78,10 +96,7 @@ function App() {
             const playlist = await createPlaylist();
 
             if (playlist) {
-                spotifyApi.current.addTracksToPlaylist(
-                    playlist.id,
-                    recommendations.tracks.map(track => track.uri)
-                );
+                addTracksToPlaylist(playlist, recommendations);
             }
         }
     };
@@ -134,29 +149,31 @@ function App() {
             {token && user ? (
                 <>
                     <h1>Hi, {user.display_name}!</h1>
-                    <p>Add 5 artists to get a personalised playlist.</p>
+                    <h2>Add up to 5 artists to get a personalised playlist.</h2>
 
-                    <form
-                        onSubmit={handleSubmit(onSubmit)}
-                        style={{ marginBottom: 20 }}
-                    >
-                        <input
-                            type="text"
-                            placeholder="Artist"
-                            name="artist"
-                            ref={register({ required: true, maxLength: 80 })}
-                        />
-                        {errors.artist && 'Artist is required'}
+                    {artists.length < 5 && (
+                        <form
+                            onSubmit={handleSubmit(onSubmit)}
+                            style={{ marginBottom: 20 }}
+                        >
+                            <input
+                                type="text"
+                                placeholder="Artist"
+                                name="artist"
+                                ref={register({
+                                    required: true,
+                                    maxLength: 80,
+                                })}
+                            />
+                            {errors.artist && 'Artist is required'}
 
-                        <button type="submit">Add artist</button>
-                    </form>
-                    <button onClick={getRecommendations}>
-                        Generate playlist!
-                    </button>
+                            <button type="submit">Add artist</button>
+                        </form>
+                    )}
 
                     {artists.length > 0 && (
                         <>
-                            <h2>Selected artists</h2>
+                            <h3>Selected artists</h3>
                             {artists.map((artist, index) => (
                                 <div key={artist.id}>
                                     {index + 1}. {artist.name}
@@ -171,6 +188,61 @@ function App() {
                             ))}
                         </>
                     )}
+
+                    <h2>Finetuning. What is important to you?</h2>
+                    <div style={{ marginBottom: 10 }}>
+                        <label htmlFor="acousticness">Acousticness</label>
+                        <input
+                            type="range"
+                            id="acousticness"
+                            name="acousticness"
+                            min="0.0"
+                            max="1.0"
+                            defaultValue="0.0"
+                            step="0.1"
+                        />
+                    </div>
+
+                    <div style={{ marginBottom: 10 }}>
+                        <label htmlFor="danceability">Danceability</label>
+                        <input
+                            type="range"
+                            id="danceability"
+                            name="danceability"
+                            min="0.0"
+                            max="1.0"
+                            defaultValue="0.0"
+                            step="0.1"
+                        />
+                    </div>
+
+                    <div style={{ marginBottom: 10 }}>
+                        <label htmlFor="energy">Energy</label>
+                        <input
+                            type="range"
+                            id="energy"
+                            name="energy"
+                            min="0.0"
+                            max="1.0"
+                            defaultValue="0.0"
+                            step="0.1"
+                        />
+                    </div>
+                    {/*
+                    target_instrumentalness?: number;
+                    target_key?: number;
+                    target_liveness?: number;
+                    target_loudness?: number;
+                    target_mode?: number;
+                    target_popularity?: number;
+                    target_speechiness?: number;
+                    target_tempo?: number;
+                    target_time_signature?: number;
+                    target_valence?: number;
+                    */}
+
+                    <h2>Generate playlist</h2>
+                    <button onClick={getRecommendations}>Generate</button>
                 </>
             ) : (
                 <button onClick={loginWithSpotify}>Login with Spotify</button>
