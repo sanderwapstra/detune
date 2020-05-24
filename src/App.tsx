@@ -4,11 +4,12 @@ import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import SpotifyWebApi from 'spotify-web-api-js';
 import AddArtistForm from './components/AddArtistForm';
+import GeneratePlaylist from './components/GeneratePlaylist';
 import Login from './components/Login';
-import { setToken, setUser } from './store/appSlice';
-import { RootState } from './store/reducers';
 import SelectedArtists from './components/SelectedArtists';
 import TuneTrackAttributes from './components/TuneTrackAttributes';
+import { setToken, setUser } from './store/appSlice';
+import { RootState } from './store/reducers';
 
 function App() {
     const dispatch = useDispatch();
@@ -64,11 +65,18 @@ function App() {
             {token && user ? (
                 <>
                     <h1>Hi, {user.display_name}!</h1>
-                    <h2>Add up to 5 artists to get a personalised playlist.</h2>
+
+                    <h2>
+                        Add up to 5 artists to create a personalised playlist.
+                    </h2>
 
                     {artists.length < 5 && <AddArtistForm />}
+
                     {artists.length > 0 && <SelectedArtists />}
-                    {artists.length > 0 && <TuneTrackAttributes />}
+
+                    <TuneTrackAttributes />
+
+                    {artists.length > 0 && <GeneratePlaylist />}
                 </>
             ) : (
                 <Login />

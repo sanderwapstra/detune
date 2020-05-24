@@ -1,109 +1,93 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-type TrackAttribute = {
-    active: boolean;
-    value: number;
-};
+export enum TrackAttributesEnum {
+    Acousticness = 'target_acousticness',
+    Danceability = 'target_danceability',
+    Energy = 'target_energy',
+    Instrumentalness = 'target_instrumentalness',
+    Liveness = 'target_liveness',
+    Loudness = 'target_loudness',
+    Mode = 'target_mode',
+    Popularity = 'target_popularity',
+    Tempo = 'target_tempo',
+    TimeSignature = 'target_time_signature',
+    Valence = 'target_valence',
+}
 
 type SliceState = {
-    acousticness: TrackAttribute;
-    danceability: TrackAttribute;
-    energy: TrackAttribute;
-    instrumentalness: TrackAttribute;
-    liveness: TrackAttribute;
-    loudness: TrackAttribute;
-    mode: TrackAttribute;
-    popularity: TrackAttribute;
-    tempo: TrackAttribute;
-    time_signature: TrackAttribute;
-    valence: TrackAttribute;
+    [key in TrackAttributesEnum]: {
+        active: boolean;
+        value: number;
+    };
+};
+
+const initialState: SliceState = {
+    target_acousticness: {
+        active: false,
+        value: 0.5,
+    },
+    target_danceability: {
+        active: false,
+        value: 0.5,
+    },
+    target_energy: {
+        active: false,
+        value: 0.5,
+    },
+    target_instrumentalness: {
+        active: false,
+        value: 0.5,
+    },
+    target_liveness: {
+        active: false,
+        value: 0.8,
+    },
+    target_loudness: {
+        active: false,
+        value: -30,
+    },
+    target_mode: {
+        active: false,
+        value: 1,
+    },
+    target_popularity: {
+        active: false,
+        value: 50,
+    },
+    target_tempo: {
+        active: false,
+        value: 80,
+    },
+    target_time_signature: {
+        active: false,
+        value: 4,
+    },
+    target_valence: {
+        active: false,
+        value: 0.5,
+    },
 };
 
 const trackAttributesSlice = createSlice({
     name: 'trackAttributes',
-    initialState: {
-        acousticness: {
-            active: false,
-            value: 0.5,
-        },
-        danceability: {
-            active: false,
-            value: 0.5,
-        },
-        energy: {
-            active: false,
-            value: 0.5,
-        },
-        instrumentalness: {
-            active: false,
-            value: 0.5,
-        },
-        liveness: {
-            active: false,
-            value: 0.8,
-        },
-        loudness: {
-            active: false,
-            value: -30,
-        },
-        mode: {
-            active: false,
-            value: 0,
-        },
-        popularity: {
-            active: false,
-            value: 50,
-        },
-        tempo: {
-            active: false,
-            value: 80,
-        },
-        time_signature: {
-            active: false,
-            value: 4,
-        },
-        valence: {
-            active: false,
-            value: 0.5,
-        },
-    } as SliceState,
+    initialState,
     reducers: {
-        setAcousticness: (state, action) => {
-            state.acousticness = action.payload;
-        },
-        setDanceability: (state, action) => {
-            state.danceability = action.payload;
-        },
-        setEnergy: (state, action) => {
-            state.energy = action.payload;
-        },
-        setInstrumentalness: (state, action) => {
-            state.instrumentalness = action.payload;
-        },
-        setLiveness: (state, action) => {
-            state.liveness = action.payload;
-        },
-        setLoudness: (state, action) => {
-            state.loudness = action.payload;
-        },
-        setMode: (state, action) => {
-            state.mode = action.payload;
-        },
-        setPopularity: (state, action) => {
-            state.popularity = action.payload;
-        },
-        setTempo: (state, action) => {
-            state.tempo = action.payload;
-        },
-        setTimeSignature: (state, action) => {
-            state.time_signature = action.payload;
-        },
-        setValence: (state, action) => {
-            state.valence = action.payload;
+        setTrackAttribute: (
+            state,
+            action: PayloadAction<{
+                attribute: TrackAttributesEnum;
+                active?: boolean;
+                value?: number;
+            }>
+        ) => {
+            const { attribute, active, value } = action.payload;
+
+            if (active !== undefined) state[attribute].active = active;
+            if (value !== undefined) state[attribute].value = value;
         },
     },
 });
 
-export const { setAcousticness } = trackAttributesSlice.actions;
+export const { setTrackAttribute } = trackAttributesSlice.actions;
 
 export default trackAttributesSlice.reducer;

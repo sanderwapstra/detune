@@ -3,11 +3,15 @@ import React, { useRef } from 'react';
 import { useSelector } from 'react-redux';
 import SpotifyWebApi from 'spotify-web-api-js';
 import { RootState } from '../store/reducers';
+import { TrackAttributesEnum } from '../store/trackAttributesSlice';
 
 const GeneratePlaylist: React.FC = () => {
     const spotifyApi = useRef(new SpotifyWebApi());
     const { user } = useSelector((state: RootState) => state.app);
     const artists = useSelector((state: RootState) => state.artists);
+    const trackAttributes = useSelector(
+        (state: RootState) => state.trackAttributes
+    );
 
     const createPlaylist = async () => {
         if (!user) return;
@@ -47,10 +51,22 @@ const GeneratePlaylist: React.FC = () => {
     const getRecommendations = async () => {
         if (!artists.length) return;
 
+        const activeTrackAttributes: {
+            [key in TrackAttributesEnum]?: number;
+        } = {};
+
+        Object.keys(trackAttributes).map(attribute => {
+            if (trackAttributes[attribute].active) {
+                activeTrackAttributes[attribute] =
+                    trackAttributes[attribute].value;
+            }
+        });
+
         const [err, recommendations] = await to(
             spotifyApi.current.getRecommendations({
                 seed_artists: artists.map(artist => artist.id),
                 limit: 50,
+                ...activeTrackAttributes,
             })
         );
 
