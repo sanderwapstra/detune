@@ -55,10 +55,10 @@ const GeneratePlaylist: React.FC = () => {
             [key in TrackAttributesEnum]?: number;
         } = {};
 
-        Object.keys(trackAttributes).map(attribute => {
-            if (trackAttributes[attribute].active) {
-                activeTrackAttributes[attribute] =
-                    trackAttributes[attribute].value;
+        Object.keys(trackAttributes).forEach(attribute => {
+            if (trackAttributes[attribute as TrackAttributesEnum].active) {
+                activeTrackAttributes[attribute as TrackAttributesEnum] =
+                    trackAttributes[attribute as TrackAttributesEnum].value;
             }
         });
 
