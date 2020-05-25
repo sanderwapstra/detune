@@ -10,14 +10,24 @@ const SelectedArtists: React.FC = () => {
     return (
         <>
             <h3>Selected artists</h3>
-            {artists.map((artist, index) => (
-                <div key={artist.id}>
-                    {index + 1}. {artist.name}
-                    <button onClick={() => dispatch(removeArtist(artist.id))}>
-                        Remove
-                    </button>
-                </div>
-            ))}
+            <ol>
+                {artists.map((artist, index) => (
+                    <li key={artist.id}>
+                        <span>{artist.name}</span>
+                        <img
+                            src={artist.images[0].url}
+                            alt={`${artist.name}`}
+                            width="180"
+                            height="180"
+                        />
+                        <button
+                            onClick={() => dispatch(removeArtist(artist.id))}
+                        >
+                            Remove
+                        </button>
+                    </li>
+                ))}
+            </ol>
         </>
     );
 };
