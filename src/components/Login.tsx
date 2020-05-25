@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from './Button/Button';
 
 const Login: React.FC = () => {
     const loginWithSpotify = () => {
@@ -15,7 +16,7 @@ const Login: React.FC = () => {
         );
     };
 
-    return <button onClick={loginWithSpotify}>Login with Spotify</button>;
+    return <Button click={loginWithSpotify}>Login with Spotify</Button>;
 };
 
 export default Login;
