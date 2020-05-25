@@ -9,6 +9,8 @@ import { addArtist } from '../store/artistsSlice';
 const AddArtistForm: React.FC = () => {
     const dispatch = useDispatch();
     const spotifyApi = useRef(new SpotifyWebApi());
+    const formRef = useRef<HTMLFormElement | null>(null);
+    const inputRef = useRef<HTMLInputElement>();
     const { register, handleSubmit, errors } = useForm();
 
     const onSubmit = async (data: any) => {
@@ -27,19 +29,32 @@ const AddArtistForm: React.FC = () => {
 
         if (results?.artists?.items) {
             dispatch(addArtist(results.artists.items[0]));
+
+            formRef.current?.reset();
+            inputRef.current?.focus();
         }
     };
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} style={{ marginBottom: 20 }}>
+        <form
+            ref={formRef}
+            onSubmit={handleSubmit(onSubmit)}
+            style={{ marginBottom: 20 }}
+        >
             <input
                 type="text"
                 placeholder="Artist"
                 name="artist"
-                ref={register({
-                    required: true,
-                    maxLength: 80,
-                })}
+                ref={e => {
+                    if (e) {
+                        register(e, {
+                            required: true,
+                            maxLength: 80,
+                        });
+
+                        inputRef.current = e;
+                    }
+                }}
             />
             {errors.artist && 'Artist is required'}
 
