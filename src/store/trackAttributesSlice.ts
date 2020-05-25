@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-export enum TrackAttributesEnum {
+export enum TrackAttributesOptions {
     Acousticness = 'target_acousticness',
     Danceability = 'target_danceability',
     Energy = 'target_energy',
@@ -14,14 +14,14 @@ export enum TrackAttributesEnum {
     Valence = 'target_valence',
 }
 
-type SliceState = {
-    [key in TrackAttributesEnum]: {
-        active: boolean;
-        value: number;
-    };
+type TrackAttributeSettings = {
+    active: boolean;
+    value: number;
 };
 
-const initialState: SliceState = {
+type TrackAttributes = Record<string, TrackAttributeSettings>;
+
+const initialState: TrackAttributes = {
     target_acousticness: {
         active: false,
         value: 0.5,
@@ -75,7 +75,7 @@ const trackAttributesSlice = createSlice({
         setTrackAttribute: (
             state,
             action: PayloadAction<{
-                attribute: TrackAttributesEnum;
+                attribute: TrackAttributesOptions;
                 active?: boolean;
                 value?: number;
             }>

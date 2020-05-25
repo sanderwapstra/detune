@@ -3,7 +3,6 @@ import React, { useRef } from 'react';
 import { useSelector } from 'react-redux';
 import SpotifyWebApi from 'spotify-web-api-js';
 import { RootState } from '../store/reducers';
-import { TrackAttributesEnum } from '../store/trackAttributesSlice';
 
 const GeneratePlaylist: React.FC = () => {
     const spotifyApi = useRef(new SpotifyWebApi());
@@ -51,14 +50,12 @@ const GeneratePlaylist: React.FC = () => {
     const getRecommendations = async () => {
         if (!artists.length) return;
 
-        const activeTrackAttributes: {
-            [key in TrackAttributesEnum]?: number;
-        } = {};
+        const activeTrackAttributes: { [key: string]: number } = {};
 
         Object.keys(trackAttributes).forEach(attribute => {
-            if (trackAttributes[attribute as TrackAttributesEnum].active) {
-                activeTrackAttributes[attribute as TrackAttributesEnum] =
-                    trackAttributes[attribute as TrackAttributesEnum].value;
+            if (trackAttributes[attribute].active) {
+                activeTrackAttributes[attribute] =
+                    trackAttributes[attribute].value;
             }
         });
 

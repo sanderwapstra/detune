@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../store/reducers';
 import {
     setTrackAttribute,
-    TrackAttributesEnum,
+    TrackAttributesOptions,
 } from '../store/trackAttributesSlice';
 
 const TuneTrackAttributes: React.FC = () => {
@@ -26,7 +26,7 @@ const TuneTrackAttributes: React.FC = () => {
         active,
         value,
     }: {
-        attribute: TrackAttributesEnum;
+        attribute: TrackAttributesOptions;
         active?: boolean;
         value?: number;
     }) => {
@@ -47,7 +47,7 @@ const TuneTrackAttributes: React.FC = () => {
                     type="checkbox"
                     onChange={e => {
                         handleChange({
-                            attribute: TrackAttributesEnum.Acousticness,
+                            attribute: TrackAttributesOptions.Acousticness,
                             active: e.target.checked,
                         });
                     }}
@@ -64,7 +64,7 @@ const TuneTrackAttributes: React.FC = () => {
                     step="0.1"
                     onChange={e => {
                         handleChange({
-                            attribute: TrackAttributesEnum.Acousticness,
+                            attribute: TrackAttributesOptions.Acousticness,
                             value: Number(e.target.value),
                         });
                     }}
@@ -76,7 +76,7 @@ const TuneTrackAttributes: React.FC = () => {
                     type="checkbox"
                     onChange={e => {
                         handleChange({
-                            attribute: TrackAttributesEnum.Danceability,
+                            attribute: TrackAttributesOptions.Danceability,
                             active: e.target.checked,
                         });
                     }}
@@ -93,7 +93,7 @@ const TuneTrackAttributes: React.FC = () => {
                     step="0.1"
                     onChange={e => {
                         handleChange({
-                            attribute: TrackAttributesEnum.Danceability,
+                            attribute: TrackAttributesOptions.Danceability,
                             value: Number(e.target.value),
                         });
                     }}
@@ -105,7 +105,7 @@ const TuneTrackAttributes: React.FC = () => {
                     type="checkbox"
                     onChange={e => {
                         handleChange({
-                            attribute: TrackAttributesEnum.Energy,
+                            attribute: TrackAttributesOptions.Energy,
                             active: e.target.checked,
                         });
                     }}
@@ -122,7 +122,7 @@ const TuneTrackAttributes: React.FC = () => {
                     step="0.1"
                     onChange={e => {
                         handleChange({
-                            attribute: TrackAttributesEnum.Energy,
+                            attribute: TrackAttributesOptions.Energy,
                             value: Number(e.target.value),
                         });
                     }}
@@ -134,7 +134,7 @@ const TuneTrackAttributes: React.FC = () => {
                     type="checkbox"
                     onChange={e => {
                         handleChange({
-                            attribute: TrackAttributesEnum.Instrumentalness,
+                            attribute: TrackAttributesOptions.Instrumentalness,
                             active: e.target.checked,
                         });
                     }}
@@ -151,7 +151,7 @@ const TuneTrackAttributes: React.FC = () => {
                     step="0.1"
                     onChange={e => {
                         handleChange({
-                            attribute: TrackAttributesEnum.Instrumentalness,
+                            attribute: TrackAttributesOptions.Instrumentalness,
                             value: Number(e.target.value),
                         });
                     }}
@@ -166,7 +166,7 @@ const TuneTrackAttributes: React.FC = () => {
                         name="liveness"
                         onChange={e => {
                             handleChange({
-                                attribute: TrackAttributesEnum.Liveness,
+                                attribute: TrackAttributesOptions.Liveness,
                                 active: e.target.checked,
                             });
                         }}
@@ -180,7 +180,7 @@ const TuneTrackAttributes: React.FC = () => {
                     type="checkbox"
                     onChange={e => {
                         handleChange({
-                            attribute: TrackAttributesEnum.Loudness,
+                            attribute: TrackAttributesOptions.Loudness,
                             active: e.target.checked,
                         });
                     }}
@@ -196,7 +196,7 @@ const TuneTrackAttributes: React.FC = () => {
                     value={target_loudness.value}
                     onChange={e => {
                         handleChange({
-                            attribute: TrackAttributesEnum.Loudness,
+                            attribute: TrackAttributesOptions.Loudness,
                             value: Number(e.target.value),
                         });
                     }}
@@ -208,7 +208,7 @@ const TuneTrackAttributes: React.FC = () => {
                     type="checkbox"
                     onChange={e => {
                         handleChange({
-                            attribute: TrackAttributesEnum.Mode,
+                            attribute: TrackAttributesOptions.Mode,
                             active: e.target.checked,
                         });
                     }}
@@ -224,7 +224,7 @@ const TuneTrackAttributes: React.FC = () => {
                         checked={target_mode.value === 1}
                         onChange={e => {
                             handleChange({
-                                attribute: TrackAttributesEnum.Mode,
+                                attribute: TrackAttributesOptions.Mode,
                                 value: Number(e.target.value),
                             });
                         }}
@@ -242,7 +242,7 @@ const TuneTrackAttributes: React.FC = () => {
                         checked={target_mode.value === 0}
                         onChange={e => {
                             handleChange({
-                                attribute: TrackAttributesEnum.Mode,
+                                attribute: TrackAttributesOptions.Mode,
                                 value: Number(e.target.value),
                             });
                         }}
@@ -256,7 +256,7 @@ const TuneTrackAttributes: React.FC = () => {
                     type="checkbox"
                     onChange={e => {
                         handleChange({
-                            attribute: TrackAttributesEnum.Popularity,
+                            attribute: TrackAttributesOptions.Popularity,
                             active: e.target.checked,
                         });
                     }}
@@ -272,7 +272,7 @@ const TuneTrackAttributes: React.FC = () => {
                     value={target_popularity.value}
                     onChange={e => {
                         handleChange({
-                            attribute: TrackAttributesEnum.Popularity,
+                            attribute: TrackAttributesOptions.Popularity,
                             value: Number(e.target.value),
                         });
                     }}
@@ -284,7 +284,7 @@ const TuneTrackAttributes: React.FC = () => {
                     type="checkbox"
                     onChange={e => {
                         handleChange({
-                            attribute: TrackAttributesEnum.Tempo,
+                            attribute: TrackAttributesOptions.Tempo,
                             active: e.target.checked,
                         });
                     }}
@@ -298,7 +298,7 @@ const TuneTrackAttributes: React.FC = () => {
                     value={target_tempo.value}
                     onChange={e => {
                         handleChange({
-                            attribute: TrackAttributesEnum.Tempo,
+                            attribute: TrackAttributesOptions.Tempo,
                             value: Number(e.target.value),
                         });
                     }}
@@ -310,7 +310,7 @@ const TuneTrackAttributes: React.FC = () => {
                     type="checkbox"
                     onChange={e => {
                         handleChange({
-                            attribute: TrackAttributesEnum.TimeSignature,
+                            attribute: TrackAttributesOptions.TimeSignature,
                             active: e.target.checked,
                         });
                     }}
@@ -324,7 +324,7 @@ const TuneTrackAttributes: React.FC = () => {
                     value={target_time_signature.value}
                     onChange={e => {
                         handleChange({
-                            attribute: TrackAttributesEnum.TimeSignature,
+                            attribute: TrackAttributesOptions.TimeSignature,
                             value: Number(e.target.value),
                         });
                     }}
@@ -336,7 +336,7 @@ const TuneTrackAttributes: React.FC = () => {
                     type="checkbox"
                     onChange={e => {
                         handleChange({
-                            attribute: TrackAttributesEnum.Valence,
+                            attribute: TrackAttributesOptions.Valence,
                             active: e.target.checked,
                         });
                     }}
@@ -353,7 +353,7 @@ const TuneTrackAttributes: React.FC = () => {
                     step="0.1"
                     onChange={e => {
                         handleChange({
-                            attribute: TrackAttributesEnum.Valence,
+                            attribute: TrackAttributesOptions.Valence,
                             value: Number(e.target.value),
                         });
                     }}
