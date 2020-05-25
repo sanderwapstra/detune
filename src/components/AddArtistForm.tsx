@@ -1,5 +1,6 @@
 import to from 'await-to-js';
 import React, { useRef } from 'react';
+import ReactGA from 'react-ga';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import SpotifyWebApi from 'spotify-web-api-js';
@@ -18,6 +19,11 @@ const AddArtistForm: React.FC = () => {
         if (err) {
             console.error(`Something went wrong: ${err}`);
         }
+
+        ReactGA.event({
+            category: 'Artists',
+            action: 'User added an artist',
+        });
 
         if (results?.artists?.items) {
             dispatch(addArtist(results.artists.items[0]));

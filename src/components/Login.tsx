@@ -1,8 +1,14 @@
 import React from 'react';
+import ReactGA from 'react-ga';
 import Button from './Button/Button';
 
 const Login: React.FC = () => {
     const loginWithSpotify = () => {
+        ReactGA.event({
+            category: 'Login',
+            action: 'User pressed Login with Spotify button',
+        });
+
         const scopes = 'playlist-modify-public';
         const redirectUrl =
             process.env.NODE_ENV === 'development'

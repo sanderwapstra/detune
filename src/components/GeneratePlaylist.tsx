@@ -1,5 +1,6 @@
 import to from 'await-to-js';
 import React, { useRef, useState } from 'react';
+import ReactGA from 'react-ga';
 import { useSelector } from 'react-redux';
 import SpotifyWebApi from 'spotify-web-api-js';
 import { RootState } from '../store/reducers';
@@ -19,6 +20,13 @@ const GeneratePlaylist: React.FC = () => {
 
     const createPlaylist = async () => {
         if (!user) return;
+
+        ReactGA.event({
+            category: 'Playlist',
+            action: name
+                ? 'User has chosen a custom name'
+                : 'User did not chose a custom name',
+        });
 
         const [err, playlist] = await to(
             spotifyApi.current.createPlaylist(user.id, {
@@ -57,10 +65,20 @@ const GeneratePlaylist: React.FC = () => {
     const getRecommendations = async () => {
         if (!artists.length) return;
 
+        ReactGA.event({
+            category: 'Playlist',
+            action: `User has generated a playlist`,
+        });
+
         const activeTrackAttributes: { [key: string]: number } = {};
 
         Object.keys(trackAttributes).forEach(attribute => {
             if (trackAttributes[attribute].active) {
+                ReactGA.event({
+                    category: 'Track attributes',
+                    action: `User has tuned ${attribute}`,
+                });
+
                 activeTrackAttributes[attribute] =
                     trackAttributes[attribute].value;
             }

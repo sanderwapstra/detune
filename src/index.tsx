@@ -1,10 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import ReactGA from 'react-ga';
 import { Provider } from 'react-redux';
 import { createGlobalStyle } from 'styled-components';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { store } from './store/store';
+
+ReactGA.initialize('UA-167595336-1');
 
 const GlobalStyle = createGlobalStyle`
     body {
