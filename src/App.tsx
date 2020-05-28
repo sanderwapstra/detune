@@ -20,14 +20,22 @@ function App() {
     // Save token after first login
     useEffect(() => {
         if (!token && window.location.hash) {
-            const parsedHash = queryString.parse(window.location.hash);
+            const { access_token, state } = queryString.parse(
+                window.location.hash
+            );
+            const storedState = localStorage.getItem('stateKey');
 
-            dispatch(setToken(parsedHash.access_token));
-
-            if (parsedHash && parsedHash.access_token) {
-                spotifyApi.current.setAccessToken(
-                    parsedHash.access_token as string
+            if (access_token && (state == null || state !== storedState)) {
+                console.log(
+                    'There was an error during the authentication or you need to log in again'
                 );
+            } else {
+                localStorage.removeItem('stateKey');
+
+                if (access_token) {
+                    dispatch(setToken(access_token));
+                    spotifyApi.current.setAccessToken(access_token as string);
+                }
             }
         }
     }, [dispatch, token]);

@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactGA from 'react-ga';
+import { v4 as uuidv4 } from 'uuid';
 import Button from './Button/Button';
 
 const Login: React.FC = () => {
@@ -8,6 +9,9 @@ const Login: React.FC = () => {
             category: 'Login',
             action: 'User pressed Login with Spotify button',
         });
+
+        const state = uuidv4();
+        localStorage.setItem('stateKey', state);
 
         const scopes = 'playlist-modify-public';
         const redirectUrl =
@@ -18,7 +22,9 @@ const Login: React.FC = () => {
         window.location.replace(
             `https://accounts.spotify.com/authorize?client_id=453ef47ef0c24a63a38a91b855d9c9b3&redirect_uri=${encodeURIComponent(
                 redirectUrl
-            )}&scope=${encodeURIComponent(scopes)}&response_type=token`
+            )}&scope=${encodeURIComponent(
+                scopes
+            )}&state=${state}&response_type=token`
         );
     };
 
