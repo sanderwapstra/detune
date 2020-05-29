@@ -9,6 +9,7 @@ import AddArtistForm from './components/AddArtistForm';
 import GeneratePlaylist from './components/GeneratePlaylist';
 import Login from './components/Login/Login';
 import Logo from './components/Logo/Logo';
+import Profile from './components/Profile/Profile';
 import SelectedArtists from './components/SelectedArtists';
 import Tagline from './components/Tagline/Tagline';
 import TuneTrackAttributes from './components/TuneTrackAttributes';
@@ -92,8 +93,7 @@ function App() {
                 {token && user ? (
                     <Row>
                         <Col>
-                            <h1>Hi, {user.display_name}!</h1>
-
+                            <Profile />
                             <h2>
                                 Add up to 5 artists to create a personalised
                                 playlist.

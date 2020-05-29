@@ -6,7 +6,7 @@ import { media } from 'styled-bootstrap-grid';
 const StyledTagline = styled.h1`
     line-height: 1.1;
     font-weight: 700;
-    margin-bottom: 50px;
+    margin-bottom: 48px;
 
     ${map(typography.h1, (fontSize: string) => `font-size: ${fontSize};`)};
 

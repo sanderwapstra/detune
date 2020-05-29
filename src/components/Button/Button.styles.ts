@@ -11,7 +11,7 @@ const StyledButton = styled.button`
     color: #fff;
     border: 0;
     border-radius: 28px;
-    padding: 20px 30px;
+    padding: 16px 32px;
     cursor: pointer;
     text-transform: uppercase;
     letter-spacing: 2px;

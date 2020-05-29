@@ -3,12 +3,12 @@ import { media } from 'styled-bootstrap-grid';
 
 const StyledLogo = styled.div`
     font-weight: 700;
-    font-size: 20px;
+    font-size: 24px;
     letter-spacing: 1px;
-    padding: 30px 0;
+    padding: 32px 0;
 
     ${media.sm`
-        padding: 30px 15px;
+        padding: 32px 16px 72px;
     `}
 `;
 
