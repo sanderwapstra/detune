@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactGA from 'react-ga';
 import { v4 as uuidv4 } from 'uuid';
-import Button from './Button/Button';
+import Button from '../Button/Button';
+import StyledLogin from './Login.styles';
 
 const Login: React.FC = () => {
     const loginWithSpotify = () => {
@@ -28,7 +29,11 @@ const Login: React.FC = () => {
         );
     };
 
-    return <Button click={loginWithSpotify}>Login with Spotify</Button>;
+    return (
+        <StyledLogin>
+            <Button click={loginWithSpotify}>Login with Spotify</Button>
+        </StyledLogin>
+    );
 };
 
 export default Login;

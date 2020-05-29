@@ -3,10 +3,14 @@ import queryString from 'query-string';
 import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import SpotifyWebApi from 'spotify-web-api-js';
+import { Col, Container, Row } from 'styled-bootstrap-grid';
+import StyledApp from './App.styles';
 import AddArtistForm from './components/AddArtistForm';
 import GeneratePlaylist from './components/GeneratePlaylist';
-import Login from './components/Login';
+import Login from './components/Login/Login';
+import Logo from './components/Logo/Logo';
 import SelectedArtists from './components/SelectedArtists';
+import Tagline from './components/Tagline/Tagline';
 import TuneTrackAttributes from './components/TuneTrackAttributes';
 import { setToken, setUser } from './store/appSlice';
 import { RootState } from './store/reducers';
@@ -69,27 +73,50 @@ function App() {
     }, [dispatch, token]);
 
     return (
-        <div className="App">
-            {token && user ? (
-                <>
-                    <h1>Hi, {user.display_name}!</h1>
+        <StyledApp>
+            <Container fluid>
+                <Row>
+                    <Col>
+                        <Logo />
+                    </Col>
+                </Row>
+            </Container>
 
-                    <h2>
-                        Add up to 5 artists to create a personalised playlist.
-                    </h2>
+            <Container>
+                <Row>
+                    <Col>
+                        <Tagline />
+                    </Col>
+                </Row>
 
-                    {artists.length < 5 && <AddArtistForm />}
+                {token && user ? (
+                    <Row>
+                        <Col>
+                            <h1>Hi, {user.display_name}!</h1>
 
-                    {artists.length > 0 && <SelectedArtists />}
+                            <h2>
+                                Add up to 5 artists to create a personalised
+                                playlist.
+                            </h2>
 
-                    <TuneTrackAttributes />
+                            {artists.length < 5 && <AddArtistForm />}
 
-                    {artists.length > 0 && <GeneratePlaylist />}
-                </>
-            ) : (
-                <Login />
-            )}
-        </div>
+                            {artists.length > 0 && <SelectedArtists />}
+
+                            <TuneTrackAttributes />
+
+                            {artists.length > 0 && <GeneratePlaylist />}
+                        </Col>
+                    </Row>
+                ) : (
+                    <Row>
+                        <Col>
+                            <Login />
+                        </Col>
+                    </Row>
+                )}
+            </Container>
+        </StyledApp>
     );
 }
 

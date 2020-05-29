@@ -2,10 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactGA from 'react-ga';
 import { Provider } from 'react-redux';
-import { createGlobalStyle } from 'styled-components';
+import { BaseCSS } from 'styled-bootstrap-grid';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import { Normalize } from 'styled-normalize';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { store } from './store/store';
+import { theme } from './styles/theme';
 
 ReactGA.initialize('UA-167595336-1');
 
@@ -15,13 +18,37 @@ const GlobalStyle = createGlobalStyle`
         background-color: #000;
         color: #fff;
     }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    hgroup,
+    ul,
+    ol,
+    dd,
+    p,
+    figure,
+    blockquote,
+    pre,
+    table,
+    fieldset,
+    hr {
+        margin: 0;
+    }
 `;
 
 ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>
-            <GlobalStyle />
-            <App />
+            <ThemeProvider theme={theme}>
+                <Normalize />
+                <BaseCSS />
+                <GlobalStyle />
+                <App />
+            </ThemeProvider>
         </Provider>
     </React.StrictMode>,
     document.getElementById('root')
