@@ -4,7 +4,9 @@ import ReactGA from 'react-ga';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import SpotifyWebApi from 'spotify-web-api-js';
-import { addArtist } from '../store/artistsSlice';
+import { addArtist } from '../../store/artistsSlice';
+import StyledAddArtistForm from './AddArtistForm.styles';
+import { ReactComponent as Search } from '../../static/svg/search.svg';
 
 const AddArtistForm: React.FC = () => {
     const dispatch = useDispatch();
@@ -36,30 +38,28 @@ const AddArtistForm: React.FC = () => {
     };
 
     return (
-        <form
-            ref={formRef}
-            onSubmit={handleSubmit(onSubmit)}
-            style={{ marginBottom: 20 }}
-        >
+        <StyledAddArtistForm ref={formRef} onSubmit={handleSubmit(onSubmit)}>
             <input
                 type="text"
-                placeholder="Artist"
+                placeholder="Start adding artists you love..."
                 name="artist"
                 ref={e => {
                     if (e) {
                         register(e, {
                             required: true,
-                            maxLength: 80,
                         });
 
                         inputRef.current = e;
                     }
                 }}
             />
+
             {errors.artist && 'Artist is required'}
 
-            <button type="submit">Add artist</button>
-        </form>
+            <button type="submit">
+                <Search width="32" height="32" />
+            </button>
+        </StyledAddArtistForm>
     );
 };
 

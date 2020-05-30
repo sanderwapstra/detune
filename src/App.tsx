@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import SpotifyWebApi from 'spotify-web-api-js';
 import { Col, Container, Row } from 'styled-bootstrap-grid';
 import StyledApp from './App.styles';
-import AddArtistForm from './components/AddArtistForm';
+import AddArtistForm from './components/AddArtistForm/AddArtistForm';
 import GeneratePlaylist from './components/GeneratePlaylist';
 import Login from './components/Login/Login';
 import Logo from './components/Logo/Logo';
@@ -94,10 +94,6 @@ function App() {
                     <Row>
                         <Col>
                             <Profile />
-                            <h2>
-                                Add up to 5 artists to create a personalised
-                                playlist.
-                            </h2>
 
                             {artists.length < 5 && <AddArtistForm />}
 
