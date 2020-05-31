@@ -31,15 +31,10 @@ function App() {
             const storedState = localStorage.getItem('stateKey');
 
             if (access_token && (state == null || state !== storedState)) {
-                console.log(
-                    'There was an error during the authentication or you need to log in again'
-                );
+                console.error('There was an error during the authentication');
             } else {
-                localStorage.removeItem('stateKey');
-
                 if (access_token) {
                     dispatch(setToken(access_token));
-                    spotifyApi.current.setAccessToken(access_token as string);
                 }
             }
         }
