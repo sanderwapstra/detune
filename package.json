@@ -16,6 +16,7 @@
         "@types/uuid": "^8.0.0",
         "await-to-js": "^2.1.1",
         "downshift": "^5.4.2",
+        "logrocket": "^1.0.7",
         "query-string": "^6.12.1",
         "react": "^16.13.1",
         "react-dom": "^16.13.1",

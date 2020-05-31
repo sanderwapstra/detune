@@ -1,3 +1,4 @@
+import LogRocket from 'logrocket';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactGA from 'react-ga';
@@ -10,6 +11,7 @@ import * as serviceWorker from './serviceWorker';
 import { store } from './store/store';
 import { theme } from './styles/theme';
 
+LogRocket.init('bhxbik/detune');
 ReactGA.initialize('UA-167595336-1');
 
 const GlobalStyle = createGlobalStyle`
