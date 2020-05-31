@@ -58,6 +58,7 @@ function App() {
             if (err) {
                 // Clear local data
                 window.localStorage.removeItem('persist:root');
+                localStorage.removeItem('stateKey');
 
                 console.error(`Something went wrong: ${err}`);
             }
