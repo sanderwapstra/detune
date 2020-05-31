@@ -1,3 +1,4 @@
+import LogRocket from 'logrocket';
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import rootReducer from './reducers';
 
@@ -9,6 +10,7 @@ const store = configureStore({
             // https://github.com/rt2zz/redux-persist/issues/988
             serializableCheck: false,
         }),
+        LogRocket.reduxMiddleware(),
     ],
 });
 
