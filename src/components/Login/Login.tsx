@@ -21,6 +21,10 @@ const Login: React.FC = () => {
             Math.PI / 2;
         const degrees = (atan * 180) / Math.PI;
 
+        if (degrees > 140 && degrees < 220) {
+            return;
+        }
+
         set({ rotate: degrees, immediate: true });
     });
 
@@ -50,20 +54,37 @@ const Login: React.FC = () => {
 
     return (
         <>
-            <animated.div
+            <animated.button
+                type="button"
                 ref={ref}
                 {...bind()}
                 style={{
                     position: 'fixed',
                     top: 0,
                     left: 0,
-                    transform: rotate.interpolate(deg => `rotate(${deg}deg)`),
-                    width: '150px',
-                    height: '150px',
-                    backgroundImage: 'linear-gradient(90deg, #222, #444, #222)',
+                    backgroundColor: '#fff',
+                    width: '200px',
+                    height: '200px',
                     borderRadius: '50%',
+                    transform: rotate.to(deg => `rotate(${deg}deg)`),
+                    transformOrigin: 'center',
+                    cursor: 'pointer',
+                    outline: 'none',
                 }}
-            ></animated.div>
+            >
+                <div
+                    style={{
+                        position: 'absolute',
+                        top: '10px',
+                        left: '50%',
+                        transform: `translate(-50%, 0)`,
+                        width: '4px',
+                        height: '90px',
+                        borderRadius: '4px',
+                        backgroundColor: 'rgba(0,0,0,0.4)',
+                    }}
+                ></div>
+            </animated.button>
             <StyledLogin>
                 <Button click={loginWithSpotify}>Login with Spotify</Button>
             </StyledLogin>
