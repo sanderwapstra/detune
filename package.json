@@ -19,6 +19,7 @@
         "logrocket": "^1.0.7",
         "query-string": "^6.12.1",
         "react": "^16.13.1",
+        "react-circular-progressbar": "^2.0.3",
         "react-dom": "^16.13.1",
         "react-ga": "^2.7.0",
         "react-hook-form": "^5.7.2",
