@@ -91,7 +91,7 @@ const Login: React.FC = () => {
     return (
         <>
             <StyledLogin>
-                <GradientSVG />
+                {/* <GradientSVG />
                 <div
                     style={{
                         position: 'fixed',
@@ -144,7 +144,7 @@ const Login: React.FC = () => {
                             backgroundColor: 'rgba(0,0,0,0.4)',
                         }}
                     ></div>
-                </animated.button>
+                </animated.button> */}
 
                 <Button click={loginWithSpotify}>Login with Spotify</Button>
             </StyledLogin>
