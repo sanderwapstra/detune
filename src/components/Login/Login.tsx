@@ -12,7 +12,7 @@ import mapNumberToRange from '../../helpers/mapNumberToRange';
 
 const GradientSVG = ({ rotation = 0 }) => {
     return (
-        <svg style={{ height: 0 }}>
+        <svg style={{ height: 0, position: 'absolute' }}>
             <defs>
                 <linearGradient
                     id="testGradient"

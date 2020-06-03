@@ -6,10 +6,10 @@ const StyledLogin = styled.div`
         stroke: url(#testGradient);
     }
 
-    ${media.sm`
+    /* ${media.sm`
         display: flex;
         justify-content: center;
-    `}
+    `} */
 `;
 
 export default StyledLogin;
