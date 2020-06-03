@@ -7,6 +7,6 @@ export const typography = {
     button: {
         xs: '12px',
         sm: '14px',
-        md: '16px',
+        md: '24px',
     },
 };

@@ -16,7 +16,8 @@ ReactGA.initialize('UA-167595336-1');
 
 const GlobalStyle = createGlobalStyle`
     body {
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'Nunito', sans-serif;
+        font-weight: 600;
         background-color: #000;
         color: #fff;
     }
