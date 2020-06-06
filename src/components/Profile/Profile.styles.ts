@@ -1,9 +1,15 @@
 import styled from 'styled-components';
+import { map } from 'styled-components-breakpoint';
+import { typography } from '../../styles/typography';
 
 const StyledProfile = styled.div`
     display: flex;
     align-items: center;
-    margin-bottom: 32px;
+    padding: 232px 0 96px;
+
+    .highlight {
+        color: #87fa5f;
+    }
 `;
 
 const StyledProfileImage = styled.img`
@@ -15,4 +21,12 @@ const StyledProfileImage = styled.img`
     margin-right: 24px;
 `;
 
-export { StyledProfile, StyledProfileImage };
+const StyledProfileTitle = styled.h1`
+    line-height: 1.25;
+    font-weight: 700;
+    margin-bottom: 24px;
+
+    ${map(typography.h1, (fontSize: string) => `font-size: ${fontSize};`)};
+`;
+
+export { StyledProfile, StyledProfileImage, StyledProfileTitle };

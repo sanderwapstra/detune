@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyledProfile, StyledProfileImage } from './Profile.styles';
+import { StyledProfile, StyledProfileTitle } from './Profile.styles';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/reducers';
 
@@ -10,10 +10,13 @@ const Profile: React.FC = () => {
 
     return (
         <StyledProfile>
-            {user && user.images && user.images.length > 0 && (
+            {/* {user && user.images && user.images.length > 0 && (
                 <StyledProfileImage src={user.images[0].url} alt="" />
-            )}
-            <h1>Hi, {user.display_name}!</h1>
+            )} */}
+            <StyledProfileTitle>
+                Hi, <span className="highlight">{user.display_name}</span>!
+                Let&rsquo;s generate your tailored playlist
+            </StyledProfileTitle>
         </StyledProfile>
     );
 };
