@@ -71,13 +71,7 @@ function App() {
 
     return (
         <StyledApp>
-            <Container>
-                <Row>
-                    <Col>
-                        <Logo />
-                    </Col>
-                </Row>
-            </Container>
+            <Logo />
 
             <Container>
                 {token && user ? (
