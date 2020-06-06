@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import { media } from 'styled-bootstrap-grid';
 
 const StyledLogo = styled.div`
+    position: absolute;
+    top: 0;
     font-weight: 900;
     font-size: 24px;
     letter-spacing: 1px;
@@ -9,7 +11,7 @@ const StyledLogo = styled.div`
     color: #87fa5f;
 
     ${media.sm`
-        padding: 32px 16px 72px;
+        padding: 64px 0 0;
     `}
 `;
 

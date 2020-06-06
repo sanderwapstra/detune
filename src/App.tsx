@@ -71,7 +71,7 @@ function App() {
 
     return (
         <StyledApp>
-            <Container fluid>
+            <Container>
                 <Row>
                     <Col>
                         <Logo />
@@ -80,19 +80,12 @@ function App() {
             </Container>
 
             <Container>
-                <Row>
-                    <Col>
-                        <Tagline />
-                    </Col>
-                </Row>
-
                 {token && user ? (
                     <Row>
                         <Col>
                             <Profile />
 
                             {artists.length < 5 && <AddArtistForm />}
-
                             {artists.length > 0 && <SelectedArtists />}
 
                             <TuneTrackAttributes />
@@ -102,7 +95,7 @@ function App() {
                     </Row>
                 ) : (
                     <Row>
-                        <Col>
+                        <Col sm={10} smOffset={1}>
                             <Login />
                         </Col>
                     </Row>

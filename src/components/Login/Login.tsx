@@ -3,6 +3,7 @@ import ReactGA from 'react-ga';
 import { v4 as uuidv4 } from 'uuid';
 import Button from '../Button/Button';
 import StyledLogin from './Login.styles';
+import Tagline from '../Tagline/Tagline';
 
 const Login: React.FC = () => {
     const loginWithSpotify = () => {
@@ -31,6 +32,7 @@ const Login: React.FC = () => {
 
     return (
         <StyledLogin>
+            <Tagline />
             <Button click={loginWithSpotify}>Login with Spotify</Button>
         </StyledLogin>
     );
