@@ -50,10 +50,7 @@ const RotaryKnob: React.FC<Props> = () => {
         <StyledRotaryKnob>
             <div
                 style={{
-                    position: 'fixed',
-                    top: 0,
-                    left: 0,
-
+                    position: 'relative',
                     width: '224px',
                     height: '224px',
                 }}
@@ -69,38 +66,39 @@ const RotaryKnob: React.FC<Props> = () => {
                         pathTransition: 'none',
                     })}
                 />
-            </div>
-            <animated.button
-                type="button"
-                ref={ref}
-                {...bind()}
-                style={{
-                    position: 'fixed',
-                    top: 32,
-                    left: 32,
-                    backgroundColor: '#fff',
-                    width: '160px',
-                    height: '160px',
-                    borderRadius: '50%',
-                    transform: rotate.to(deg => `rotate(${deg}deg)`),
-                    transformOrigin: 'center',
-                    cursor: 'pointer',
-                    outline: 'none',
-                }}
-            >
-                <div
+
+                <animated.button
+                    type="button"
+                    ref={ref}
+                    {...bind()}
                     style={{
                         position: 'absolute',
-                        top: '10px',
-                        left: '50%',
-                        transform: `translate(-50%, 0)`,
-                        width: '4px',
-                        height: 'calc(50% - 10px)',
-                        borderRadius: '4px',
-                        backgroundColor: 'rgba(0,0,0,0.4)',
+                        top: 32,
+                        left: 32,
+                        backgroundColor: '#fff',
+                        width: '160px',
+                        height: '160px',
+                        borderRadius: '50%',
+                        transform: rotate.to(deg => `rotate(${deg}deg)`),
+                        transformOrigin: 'center',
+                        cursor: 'pointer',
+                        outline: 'none',
                     }}
-                ></div>
-            </animated.button>
+                >
+                    <div
+                        style={{
+                            position: 'absolute',
+                            top: '10px',
+                            left: '50%',
+                            transform: `translate(-50%, 0)`,
+                            width: '4px',
+                            height: 'calc(50% - 10px)',
+                            borderRadius: '4px',
+                            backgroundColor: 'rgba(0,0,0,0.4)',
+                        }}
+                    ></div>
+                </animated.button>
+            </div>
         </StyledRotaryKnob>
     );
 };
