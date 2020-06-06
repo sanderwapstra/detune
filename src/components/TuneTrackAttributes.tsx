@@ -1,10 +1,12 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../store/reducers';
 import {
     setTrackAttribute,
     TrackAttributesOptions,
 } from '../store/trackAttributesSlice';
+import RotaryKnobGradient from './RotaryKnobGradient/RotaryKnobGradient';
+import RotaryKnob from './RotaryKnob/RotaryKnob';
 
 const TuneTrackAttributes: React.FC = () => {
     const dispatch = useDispatch();
@@ -41,7 +43,9 @@ const TuneTrackAttributes: React.FC = () => {
 
     return (
         <>
+            <RotaryKnobGradient />
             <h2>What is important to you?</h2>
+            <RotaryKnob />
             <div style={{ marginBottom: 10 }}>
                 <input
                     type="checkbox"
