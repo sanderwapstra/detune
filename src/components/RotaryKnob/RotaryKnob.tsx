@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import { buildStyles, CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 import { animated, useSpring } from 'react-spring';
 import { useDrag } from 'react-use-gesture';
 import useMeasure from 'react-use-measure';
-import 'react-circular-progressbar/dist/styles.css';
-import StyledRotaryKnob from './RotaryKnob.styles';
+import { isTouch } from '../../helpers/isTouch';
 import mapNumberToRange from '../../helpers/mapNumberToRange';
+import StyledRotaryKnob from './RotaryKnob.styles';
 
 type Props = {};
 
@@ -18,32 +19,41 @@ const RotaryKnob: React.FC<Props> = () => {
 
     // Set the drag hook and define component movement based on gesture data
     const bind = useDrag(({ event }) => {
-        const { height, width, left, top } = bounds;
-        const boxCenter = [left + width / 2, top + height / 2];
-        const angle =
-            Math.atan2(
-                event.clientY - boxCenter[1],
-                event.clientX - boxCenter[0]
-            ) *
-            (180 / Math.PI);
+        if (event) {
+            const { height, width, left, top } = bounds;
+            const boxCenter = [left + width / 2, top + height / 2];
+            let x: number = 0;
+            let y: number = 0;
 
-        const atan =
-            Math.atan2(event.clientY - height / 2, event.clientX - width / 2) +
-            Math.PI / 2;
-        const degrees = angle + 90;
+            if (isTouch(event)) {
+                const touch = event.touches[0] || event.changedTouches[0];
+                x = touch.pageX;
+                y = touch.pageY;
+            } else {
+                x = event.pageX;
+                y = event.pageY;
+            }
 
-        if (degrees >= 220 && degrees <= 270) {
-            setPercentage(mapNumberToRange(degrees, 220, 270, 0, 17.857142855));
-        } else if (degrees >= -90 && degrees <= 140) {
-            setPercentage(
-                mapNumberToRange(degrees, -90, 140, 17.857142855, 100)
-            );
-        } else {
-            // bite out of chart
-            console.log(`inactive chart ${degrees}`);
+            const angle =
+                Math.atan2(x - boxCenter[1], y - boxCenter[0]) *
+                (180 / Math.PI);
+            const degrees = angle + 90;
+
+            if (degrees >= 220 && degrees <= 270) {
+                setPercentage(
+                    mapNumberToRange(degrees, 220, 270, 0, 17.857142855)
+                );
+            } else if (degrees >= -90 && degrees <= 140) {
+                setPercentage(
+                    mapNumberToRange(degrees, -90, 140, 17.857142855, 100)
+                );
+            } else {
+                // bite out of chart
+                console.log(`inactive chart ${degrees}`);
+            }
+
+            set({ rotate: degrees, immediate: true });
         }
-
-        set({ rotate: degrees, immediate: true });
     });
 
     return (

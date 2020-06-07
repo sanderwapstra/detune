@@ -11,7 +11,6 @@ import Login from './components/Login/Login';
 import Logo from './components/Logo/Logo';
 import Profile from './components/Profile/Profile';
 import SelectedArtists from './components/SelectedArtists';
-import Tagline from './components/Tagline/Tagline';
 import TuneTrackAttributes from './components/TuneTrackAttributes';
 import { setToken, setUser } from './store/appSlice';
 import { RootState } from './store/reducers';
