@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { buildStyles, CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { animated, useSpring } from 'react-spring';
 import { useDrag } from 'react-use-gesture';
-import useMeasure from 'react-use-measure';
 import { isTouch } from '../../helpers/isTouch';
 import mapNumberToRange from '../../helpers/mapNumberToRange';
 import StyledRotaryKnob from './RotaryKnob.styles';
@@ -11,7 +10,7 @@ import StyledRotaryKnob from './RotaryKnob.styles';
 type Props = {};
 
 const RotaryKnob: React.FC<Props> = () => {
-    const [ref, bounds] = useMeasure();
+    const knobRef = useRef<HTMLButtonElement>(null);
     const [percentage, setPercentage] = useState(0);
     const [{ rotate }, set] = useSpring(() => ({
         rotate: 0,
@@ -19,8 +18,9 @@ const RotaryKnob: React.FC<Props> = () => {
 
     // Set the drag hook and define component movement based on gesture data
     const bind = useDrag(({ event }) => {
-        if (event) {
-            const { height, width, left, top } = bounds;
+        if (event && knobRef.current) {
+            const viewportOffset = knobRef.current.getBoundingClientRect();
+            const { top, left, width, height } = viewportOffset;
             const boxCenter = [left + width / 2, top + height / 2];
             let x: number = 0;
             let y: number = 0;
@@ -35,7 +35,7 @@ const RotaryKnob: React.FC<Props> = () => {
             }
 
             const angle =
-                Math.atan2(x - boxCenter[1], y - boxCenter[0]) *
+                Math.atan2(y - boxCenter[1], x - boxCenter[0]) *
                 (180 / Math.PI);
             const degrees = angle + 90;
 
@@ -79,7 +79,7 @@ const RotaryKnob: React.FC<Props> = () => {
 
                 <animated.button
                     type="button"
-                    ref={ref}
+                    ref={knobRef}
                     {...bind()}
                     style={{
                         position: 'absolute',
