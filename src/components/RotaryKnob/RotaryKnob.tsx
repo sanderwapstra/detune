@@ -27,11 +27,11 @@ const RotaryKnob: React.FC<Props> = () => {
 
             if (isTouch(event)) {
                 const touch = event.touches[0] || event.changedTouches[0];
-                x = touch.pageX;
-                y = touch.pageY;
+                x = touch.clientX;
+                y = touch.clientY;
             } else {
-                x = event.pageX;
-                y = event.pageY;
+                x = event.clientX;
+                y = event.clientY;
             }
 
             const angle =
