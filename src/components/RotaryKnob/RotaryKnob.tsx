@@ -49,7 +49,7 @@ const RotaryKnob: React.FC<Props> = () => {
                 );
             } else {
                 // bite out of chart
-                console.log(`inactive chart ${degrees}`);
+                return;
             }
 
             set({ rotate: degrees, immediate: true });
@@ -93,6 +93,7 @@ const RotaryKnob: React.FC<Props> = () => {
                         transformOrigin: 'center',
                         cursor: 'pointer',
                         outline: 'none',
+                        touchAction: 'none',
                     }}
                 >
                     <div
