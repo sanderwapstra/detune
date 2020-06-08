@@ -1,12 +1,13 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../store/reducers';
+import { RootState } from '../../store/reducers';
 import {
     setTrackAttribute,
     TrackAttributesOptions,
-} from '../store/trackAttributesSlice';
-import RotaryKnobGradient from './RotaryKnobGradient/RotaryKnobGradient';
-import RotaryKnob from './RotaryKnob/RotaryKnob';
+} from '../../store/trackAttributesSlice';
+import RotaryKnobGradient from '../RotaryKnobGradient/RotaryKnobGradient';
+import RotaryKnob from '../RotaryKnob/RotaryKnob';
+import StyledTuneTrackAttributes from './TuneTrackAttributes.styles';
 
 const TuneTrackAttributes: React.FC = () => {
     const dispatch = useDispatch();
@@ -42,125 +43,85 @@ const TuneTrackAttributes: React.FC = () => {
     };
 
     return (
-        <>
+        <StyledTuneTrackAttributes>
             <RotaryKnobGradient />
             <h2>What is important to you?</h2>
-            <RotaryKnob />
-            <div style={{ marginBottom: 10 }}>
-                <input
-                    type="checkbox"
-                    onChange={e => {
-                        handleChange({
-                            attribute: TrackAttributesOptions.Acousticness,
-                            active: e.target.checked,
-                        });
-                    }}
-                />
-                <label htmlFor="acousticness">Acousticness</label>
-                <input
-                    disabled={!target_acousticness.active}
-                    type="range"
-                    id="acousticness"
-                    name="acousticness"
-                    min="0.0"
-                    max="1.0"
-                    value={target_acousticness.value}
-                    step="0.1"
-                    onChange={e => {
-                        handleChange({
-                            attribute: TrackAttributesOptions.Acousticness,
-                            value: Number(e.target.value),
-                        });
-                    }}
-                />
-            </div>
 
-            <div style={{ marginBottom: 10 }}>
-                <input
-                    type="checkbox"
-                    onChange={e => {
-                        handleChange({
-                            attribute: TrackAttributesOptions.Danceability,
-                            active: e.target.checked,
-                        });
-                    }}
-                />
-                <label htmlFor="danceability">Danceability</label>
-                <input
-                    disabled={!target_danceability.active}
-                    type="range"
-                    id="danceability"
-                    name="danceability"
-                    min="0.0"
-                    max="1.0"
-                    value={target_danceability.value}
-                    step="0.1"
-                    onChange={e => {
-                        handleChange({
-                            attribute: TrackAttributesOptions.Danceability,
-                            value: Number(e.target.value),
-                        });
-                    }}
-                />
-            </div>
+            <RotaryKnob
+                title="Acousticness"
+                min={0.0}
+                max={1.0}
+                active={target_acousticness.active}
+                onValueChange={value => {
+                    handleChange({
+                        attribute: TrackAttributesOptions.Acousticness,
+                        value,
+                    });
+                }}
+                onActiveChange={active => {
+                    handleChange({
+                        attribute: TrackAttributesOptions.Acousticness,
+                        active,
+                    });
+                }}
+            />
 
-            <div style={{ marginBottom: 10 }}>
-                <input
-                    type="checkbox"
-                    onChange={e => {
-                        handleChange({
-                            attribute: TrackAttributesOptions.Energy,
-                            active: e.target.checked,
-                        });
-                    }}
-                />
-                <label htmlFor="energy">Energy</label>
-                <input
-                    disabled={!target_energy.active}
-                    type="range"
-                    id="energy"
-                    name="energy"
-                    min="0.0"
-                    max="1.0"
-                    value={target_energy.value}
-                    step="0.1"
-                    onChange={e => {
-                        handleChange({
-                            attribute: TrackAttributesOptions.Energy,
-                            value: Number(e.target.value),
-                        });
-                    }}
-                />
-            </div>
+            <RotaryKnob
+                title="Danceability"
+                min={0.0}
+                max={1.0}
+                active={target_danceability.active}
+                onValueChange={value => {
+                    handleChange({
+                        attribute: TrackAttributesOptions.Danceability,
+                        value,
+                    });
+                }}
+                onActiveChange={active => {
+                    handleChange({
+                        attribute: TrackAttributesOptions.Danceability,
+                        active,
+                    });
+                }}
+            />
 
-            <div style={{ marginBottom: 10 }}>
-                <input
-                    type="checkbox"
-                    onChange={e => {
-                        handleChange({
-                            attribute: TrackAttributesOptions.Instrumentalness,
-                            active: e.target.checked,
-                        });
-                    }}
-                />
-                <label htmlFor="instrumentalness">Instrumentalness</label>
-                <input
-                    disabled={!target_instrumentalness.active}
-                    type="range"
-                    id="instrumentalness"
-                    name="instrumentalness"
-                    min="0.0"
-                    max="1.0"
-                    value={target_instrumentalness.value}
-                    step="0.1"
-                    onChange={e => {
-                        handleChange({
-                            attribute: TrackAttributesOptions.Instrumentalness,
-                            value: Number(e.target.value),
-                        });
-                    }}
-                />
-            </div>
+            <RotaryKnob
+                title="Energy"
+                min={0.0}
+                max={1.0}
+                active={target_energy.active}
+                onValueChange={value => {
+                    handleChange({
+                        attribute: TrackAttributesOptions.Energy,
+                        value,
+                    });
+                }}
+                onActiveChange={active => {
+                    handleChange({
+                        attribute: TrackAttributesOptions.Energy,
+                        active,
+                    });
+                }}
+            />
+
+            <RotaryKnob
+                title="Instrumentalness"
+                min={0.0}
+                max={1.0}
+                active={target_instrumentalness.active}
+                onValueChange={value => {
+                    handleChange({
+                        attribute: TrackAttributesOptions.Instrumentalness,
+                        value,
+                    });
+                }}
+                onActiveChange={active => {
+                    handleChange({
+                        attribute: TrackAttributesOptions.Instrumentalness,
+                        active,
+                    });
+                }}
+            />
 
             <div style={{ marginBottom: 10 }}>
                 <label htmlFor="liveness">
@@ -363,7 +324,7 @@ const TuneTrackAttributes: React.FC = () => {
                     }}
                 />
             </div>
-        </>
+        </StyledTuneTrackAttributes>
     );
 };
 
