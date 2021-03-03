@@ -3,7 +3,9 @@ import React, { useRef, useState } from 'react';
 import ReactGA from 'react-ga';
 import { useSelector } from 'react-redux';
 import SpotifyWebApi from 'spotify-web-api-js';
-import { RootState } from '../store/reducers';
+import { RootState } from '../../store/reducers';
+import Button from '../Button/Button';
+import StyledGeneratePlaylist from './GeneratePlaylist.styles';
 
 const GeneratePlaylist: React.FC = () => {
     const spotifyApi = useRef(new SpotifyWebApi());
@@ -19,9 +21,7 @@ const GeneratePlaylist: React.FC = () => {
     };
 
     const getPlayListTitle = () => {
-        return name
-            ? `${name} - DiscoverMusic.now`
-            : 'Playlist by DiscoverMusic.now';
+        return name ? `${name} :: detune.fm` : 'Playlist by detune.fm';
     };
 
     const getPlaylistDescription = () => {
@@ -118,7 +118,7 @@ const GeneratePlaylist: React.FC = () => {
     };
 
     return (
-        <>
+        <StyledGeneratePlaylist>
             <h2>Generate playlist</h2>
 
             <div style={{ marginBottom: '10px' }}>
@@ -131,8 +131,12 @@ const GeneratePlaylist: React.FC = () => {
                 />
             </div>
 
-            <button onClick={getRecommendations}>Generate</button>
-        </>
+            <div className="actions">
+                <Button disabled={!artists.length} click={getRecommendations}>
+                    Generate playlist
+                </Button>
+            </div>
+        </StyledGeneratePlaylist>
     );
 };
 

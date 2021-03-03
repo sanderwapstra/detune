@@ -5,7 +5,7 @@ import { typography } from '../../styles/typography';
 const StyledProfile = styled.div`
     display: flex;
     align-items: center;
-    padding: 232px 0 96px;
+    padding: 200px 0 64px;
 
     .highlight {
         color: #87fa5f;

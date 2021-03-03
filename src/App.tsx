@@ -6,7 +6,7 @@ import SpotifyWebApi from 'spotify-web-api-js';
 import { Col, Container, Row } from 'styled-bootstrap-grid';
 import StyledApp from './App.styles';
 import AddArtistForm from './components/AddArtistForm/AddArtistForm';
-import GeneratePlaylist from './components/GeneratePlaylist';
+import GeneratePlaylist from './components/GeneratePlaylist/GeneratePlaylist';
 import Login from './components/Login/Login';
 import Logo from './components/Logo/Logo';
 import Profile from './components/Profile/Profile';
@@ -84,8 +84,7 @@ function App() {
                             {artists.length > 0 && <SelectedArtists />}
 
                             <TuneTrackAttributes />
-
-                            {artists.length > 0 && <GeneratePlaylist />}
+                            <GeneratePlaylist />
                         </Col>
                     </Row>
                 ) : (

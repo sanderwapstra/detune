@@ -10,9 +10,6 @@ const Profile: React.FC = () => {
 
     return (
         <StyledProfile>
-            {/* {user && user.images && user.images.length > 0 && (
-                <StyledProfileImage src={user.images[0].url} alt="" />
-            )} */}
             <StyledProfileTitle>
                 Hi, <span className="highlight">{user.display_name}</span>!
                 Let&rsquo;s generate your tailored playlist
