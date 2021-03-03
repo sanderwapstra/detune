@@ -21,7 +21,7 @@ const AddArtistForm: React.FC = () => {
         );
 
         if (err) {
-            console.error(`Something went wrong: ${err}`);
+            console.error(`❌ Something went wrong: ${err}`);
         }
 
         ReactGA.event({

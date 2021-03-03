@@ -3,13 +3,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactGA from 'react-ga';
 import { Provider } from 'react-redux';
-import { BaseCSS } from 'styled-bootstrap-grid';
+import { BaseCSS, GridThemeProvider } from 'styled-bootstrap-grid';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { Normalize } from 'styled-normalize';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { store } from './store/store';
-import { theme } from './styles/theme';
+import { theme, gridTheme } from './styles/theme';
 
 LogRocket.init('bhxbik/detune');
 ReactGA.initialize('UA-167595336-1');
@@ -47,10 +47,14 @@ ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>
             <ThemeProvider theme={theme}>
-                <Normalize />
-                <BaseCSS />
-                <GlobalStyle />
-                <App />
+                <GridThemeProvider gridTheme={gridTheme}>
+                    <>
+                        <Normalize />
+                        <BaseCSS />
+                        <GlobalStyle />
+                        <App />
+                    </>
+                </GridThemeProvider>
             </ThemeProvider>
         </Provider>
     </React.StrictMode>,

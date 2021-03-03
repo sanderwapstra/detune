@@ -30,7 +30,9 @@ function App() {
             const storedState = localStorage.getItem('stateKey');
 
             if (access_token && (state == null || state !== storedState)) {
-                console.error('There was an error during the authentication');
+                console.error(
+                    '❌ There was an error during the authentication'
+                );
             } else {
                 if (access_token) {
                     dispatch(setToken(access_token));
@@ -54,7 +56,7 @@ function App() {
                 window.localStorage.removeItem('persist:root');
                 localStorage.removeItem('stateKey');
 
-                console.error(`Something went wrong: ${err}`);
+                console.error(`❌ Something went wrong: ${err}`);
             }
 
             if (user) {

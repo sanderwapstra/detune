@@ -50,7 +50,7 @@ const GeneratePlaylist: React.FC = () => {
         );
 
         if (err) {
-            console.error(`Something went wrong: ${err}`);
+            console.error(`❌ Something went wrong: ${err}`);
         }
 
         return playlist;
@@ -68,7 +68,7 @@ const GeneratePlaylist: React.FC = () => {
         );
 
         if (err) {
-            console.error(`Something went wrong: ${err}`);
+            console.error(`❌ Something went wrong: ${err}`);
         } else {
             alert('Check your Spotify, a new playlist is ready!');
         }
@@ -105,7 +105,7 @@ const GeneratePlaylist: React.FC = () => {
         );
 
         if (err) {
-            console.error(`Something went wrong: ${err}`);
+            console.error(`❌ Something went wrong: ${err}`);
         }
 
         if (recommendations) {

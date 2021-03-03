@@ -5,8 +5,8 @@ export const typography = {
         md: '64px',
     },
     button: {
-        xs: '12px',
-        sm: '14px',
+        xs: '20px',
+        sm: '22px',
         md: '24px',
     },
 };
