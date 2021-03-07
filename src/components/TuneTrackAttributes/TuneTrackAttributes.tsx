@@ -10,6 +10,7 @@ import StyledTuneTrackAttributes from './TuneTrackAttributes.styles';
 
 const TuneTrackAttributes: React.FC = () => {
     const [values, setValues] = useState([0.5]);
+    const [isDisabled, setIsDisabled] = useState(false);
     const dispatch = useDispatch();
     const {
         target_acousticness,
@@ -46,8 +47,9 @@ const TuneTrackAttributes: React.FC = () => {
         <StyledTuneTrackAttributes>
             <h2>Tune</h2>
 
-            <div className="range">
+            <div className={`range ${isDisabled ? 'range--is-disabled' : ''}`}>
                 <Range
+                    disabled={isDisabled}
                     values={values}
                     step={0.1}
                     min={0}
@@ -86,14 +88,7 @@ const TuneTrackAttributes: React.FC = () => {
                             <div className="range-background-left" />
                             <div className="range-background-right" />
                             <div className="range-background-inner" />
-                            <div
-                                style={{
-                                    width: 4,
-                                    height: 20,
-                                    borderRadius: '1px',
-                                    backgroundColor: 'rgba(0,0,0,0.2)',
-                                }}
-                            />
+                            <div className="range-background-center" />
                         </div>
                     )}
                 />

@@ -15,6 +15,19 @@ const StyledTuneTrackAttributes = styled.div`
         );
         padding: 0 12px;
         overflow: hidden;
+
+        &--is-disabled {
+            background: #667780;
+
+            .range-background-inner {
+                border-color: #7a8f99;
+                box-shadow: 0 0 0 1px #4f5f66;
+            }
+
+            .range-background-center {
+                display: none;
+            }
+        }
     }
 
     .range-background {
@@ -32,6 +45,13 @@ const StyledTuneTrackAttributes = styled.div`
         border: 4px solid #fff;
         border-radius: 4px;
         box-shadow: 0 0 0 1px #ededed;
+    }
+
+    .range-background-center {
+        width: 4px;
+        height: 20px;
+        border-radius: 1px;
+        background-color: rgba(0, 0, 0, 0.2);
     }
 
     .range-background-left,
