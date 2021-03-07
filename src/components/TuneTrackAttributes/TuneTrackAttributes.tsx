@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Range } from 'react-range';
 import { RootState } from '../../store/reducers';
 import {
     setTrackAttribute,
     TrackAttributesOptions,
 } from '../../store/trackAttributesSlice';
-import RotaryKnobGradient from '../RotaryKnobGradient/RotaryKnobGradient';
-import RotaryKnob from '../RotaryKnob/RotaryKnob';
 import StyledTuneTrackAttributes from './TuneTrackAttributes.styles';
 
 const TuneTrackAttributes: React.FC = () => {
+    const [values, setValues] = useState([0.5]);
     const dispatch = useDispatch();
     const {
         target_acousticness,
@@ -44,84 +44,60 @@ const TuneTrackAttributes: React.FC = () => {
 
     return (
         <StyledTuneTrackAttributes>
-            <RotaryKnobGradient />
             <h2>Tune</h2>
 
-            <RotaryKnob
-                title="Acousticness"
-                min={0.0}
-                max={1.0}
-                active={target_acousticness.active}
-                onValueChange={value => {
-                    handleChange({
-                        attribute: TrackAttributesOptions.Acousticness,
-                        value,
-                    });
-                }}
-                onActiveChange={active => {
-                    handleChange({
-                        attribute: TrackAttributesOptions.Acousticness,
-                        active,
-                    });
-                }}
-            />
+            <div className="range">
+                <Range
+                    values={values}
+                    step={0.1}
+                    min={0}
+                    max={1}
+                    onChange={values => setValues(values)}
+                    renderTrack={({ props, children }) => (
+                        <div
+                            {...props}
+                            style={{
+                                ...props.style,
+                                height: '6px',
+                                width: '100%',
+                                backgroundColor: 'transparent',
+                            }}
+                        >
+                            {children}
+                        </div>
+                    )}
+                    renderThumb={({ props }) => (
+                        <div
+                            className="range-background"
+                            {...props}
+                            style={{
+                                ...props.style,
+                                height: 40,
+                                width: 24,
+                                backgroundColor: 'transparent',
+                                boxShadow:
+                                    '0 8px 24px rgba(0, 0, 0, 0.75), inset 1px 1px 4px rgba(0, 0, 0, 0.15)',
 
-            <RotaryKnob
-                title="Danceability"
-                min={0.0}
-                max={1.0}
-                active={target_danceability.active}
-                onValueChange={value => {
-                    handleChange({
-                        attribute: TrackAttributesOptions.Danceability,
-                        value,
-                    });
-                }}
-                onActiveChange={active => {
-                    handleChange({
-                        attribute: TrackAttributesOptions.Danceability,
-                        active,
-                    });
-                }}
-            />
-
-            <RotaryKnob
-                title="Energy"
-                min={0.0}
-                max={1.0}
-                active={target_energy.active}
-                onValueChange={value => {
-                    handleChange({
-                        attribute: TrackAttributesOptions.Energy,
-                        value,
-                    });
-                }}
-                onActiveChange={active => {
-                    handleChange({
-                        attribute: TrackAttributesOptions.Energy,
-                        active,
-                    });
-                }}
-            />
-
-            <RotaryKnob
-                title="Instrumentalness"
-                min={0.0}
-                max={1.0}
-                active={target_instrumentalness.active}
-                onValueChange={value => {
-                    handleChange({
-                        attribute: TrackAttributesOptions.Instrumentalness,
-                        value,
-                    });
-                }}
-                onActiveChange={active => {
-                    handleChange({
-                        attribute: TrackAttributesOptions.Instrumentalness,
-                        active,
-                    });
-                }}
-            />
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                            }}
+                        >
+                            <div className="range-background-left" />
+                            <div className="range-background-right" />
+                            <div className="range-background-inner" />
+                            <div
+                                style={{
+                                    width: 4,
+                                    height: 20,
+                                    borderRadius: '1px',
+                                    backgroundColor: 'rgba(0,0,0,0.2)',
+                                }}
+                            />
+                        </div>
+                    )}
+                />
+            </div>
 
             <div style={{ marginBottom: 10 }}>
                 <label htmlFor="liveness">

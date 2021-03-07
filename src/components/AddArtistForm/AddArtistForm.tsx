@@ -41,7 +41,7 @@ const AddArtistForm: React.FC = () => {
         <StyledAddArtistForm ref={formRef} onSubmit={handleSubmit(onSubmit)}>
             <input
                 type="text"
-                placeholder="Start adding artists you love..."
+                placeholder="Search for an artists name"
                 name="artist"
                 ref={e => {
                     if (e) {
