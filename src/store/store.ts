@@ -1,9 +1,18 @@
-import LogRocket from 'logrocket';
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import LogRocket from 'logrocket';
+import { persistReducer, persistStore } from 'redux-persist';
+import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
 import rootReducer from './reducers';
 
+const persistConfig = {
+    key: 'root',
+    storage,
+};
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
 const store = configureStore({
-    reducer: rootReducer,
+    reducer: persistedReducer,
     middleware: [
         ...getDefaultMiddleware({
             // Fix for 'A non-serializable value was detected in an action':
@@ -14,6 +23,8 @@ const store = configureStore({
     ],
 });
 
+const persistor = persistStore(store);
+
 export type AppDispatch = typeof store.dispatch;
 
-export { store };
+export { store, persistor };

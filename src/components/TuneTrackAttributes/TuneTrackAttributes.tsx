@@ -45,7 +45,7 @@ const TuneTrackAttributes: React.FC = () => {
     return (
         <StyledTuneTrackAttributes>
             <RotaryKnobGradient />
-            <h2>What is important to you?</h2>
+            <h2>Tune</h2>
 
             <RotaryKnob
                 title="Acousticness"

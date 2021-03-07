@@ -10,7 +10,7 @@ import GeneratePlaylist from './components/GeneratePlaylist/GeneratePlaylist';
 import Login from './components/Login/Login';
 import Logo from './components/Logo/Logo';
 import Profile from './components/Profile/Profile';
-import SelectedArtists from './components/SelectedArtists';
+import SelectedArtists from './components/SelectedArtists/SelectedArtists';
 import TuneTrackAttributes from './components/TuneTrackAttributes/TuneTrackAttributes';
 import { setToken, setUser } from './store/appSlice';
 import { RootState } from './store/reducers';
@@ -81,7 +81,7 @@ function App() {
                             <Profile />
 
                             {artists.length < 5 && <AddArtistForm />}
-                            {artists.length > 0 && <SelectedArtists />}
+                            {<SelectedArtists />}
 
                             <TuneTrackAttributes />
                             <GeneratePlaylist />

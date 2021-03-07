@@ -1,7 +1,7 @@
 import React from 'react';
-import { StyledProfile, StyledProfileTitle } from './Profile.styles';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/reducers';
+import { StyledProfile, StyledProfileTitle } from './Profile.styles';
 
 const Profile: React.FC = () => {
     const { user } = useSelector((state: RootState) => state.app);
@@ -12,7 +12,7 @@ const Profile: React.FC = () => {
         <StyledProfile>
             <StyledProfileTitle>
                 Hi, <span className="highlight">{user.display_name}</span>!
-                Let&rsquo;s generate your tailored playlist
+                Let&rsquo;s generate your tailored playlist.
             </StyledProfileTitle>
         </StyledProfile>
     );

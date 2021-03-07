@@ -3,12 +3,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactGA from 'react-ga';
 import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 import { BaseCSS, GridThemeProvider } from 'styled-bootstrap-grid';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { Normalize } from 'styled-normalize';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { store } from './store/store';
+import { persistor, store } from './store/store';
 import { theme, gridTheme } from './styles/theme';
 
 LogRocket.init('bhxbik/detune');
@@ -46,16 +47,18 @@ const GlobalStyle = createGlobalStyle`
 ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>
-            <ThemeProvider theme={theme}>
-                <GridThemeProvider gridTheme={gridTheme}>
-                    <>
-                        <Normalize />
-                        <BaseCSS />
-                        <GlobalStyle />
-                        <App />
-                    </>
-                </GridThemeProvider>
-            </ThemeProvider>
+            <PersistGate loading={null} persistor={persistor}>
+                <ThemeProvider theme={theme}>
+                    <GridThemeProvider gridTheme={gridTheme}>
+                        <>
+                            <Normalize />
+                            <BaseCSS />
+                            <GlobalStyle />
+                            <App />
+                        </>
+                    </GridThemeProvider>
+                </ThemeProvider>
+            </PersistGate>
         </Provider>
     </React.StrictMode>,
     document.getElementById('root')

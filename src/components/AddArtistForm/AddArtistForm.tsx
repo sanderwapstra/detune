@@ -4,9 +4,9 @@ import ReactGA from 'react-ga';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import SpotifyWebApi from 'spotify-web-api-js';
+import { ReactComponent as Search } from '../../static/svg/Search.svg';
 import { addArtist } from '../../store/artistsSlice';
 import StyledAddArtistForm from './AddArtistForm.styles';
-import { ReactComponent as Search } from '../../static/svg/search.svg';
 
 const AddArtistForm: React.FC = () => {
     const dispatch = useDispatch();
