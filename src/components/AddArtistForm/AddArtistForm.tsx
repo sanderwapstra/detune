@@ -2,13 +2,15 @@ import to from 'await-to-js';
 import React, { useRef } from 'react';
 import ReactGA from 'react-ga';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import SpotifyWebApi from 'spotify-web-api-js';
 import { ReactComponent as Search } from '../../static/svg/Search.svg';
 import { addArtist } from '../../store/artistsSlice';
+import { RootState } from '../../store/reducers';
 import StyledAddArtistForm from './AddArtistForm.styles';
 
 const AddArtistForm: React.FC = () => {
+    const artists = useSelector((state: RootState) => state.artists);
     const dispatch = useDispatch();
     const spotifyApi = useRef(new SpotifyWebApi());
     const formRef = useRef<HTMLFormElement | null>(null);
@@ -40,6 +42,7 @@ const AddArtistForm: React.FC = () => {
     return (
         <StyledAddArtistForm ref={formRef} onSubmit={handleSubmit(onSubmit)}>
             <input
+                disabled={artists.length >= 5}
                 type="text"
                 placeholder="Search for an artists name"
                 name="artist"

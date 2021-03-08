@@ -18,7 +18,6 @@ import { RootState } from './store/reducers';
 function App() {
     const dispatch = useDispatch();
     const spotifyApi = useRef(new SpotifyWebApi());
-    const artists = useSelector((state: RootState) => state.artists);
     const { token, user } = useSelector((state: RootState) => state.app);
 
     // Save token after first login
@@ -80,7 +79,7 @@ function App() {
                         <Col>
                             <Profile />
 
-                            {artists.length < 5 && <AddArtistForm />}
+                            {<AddArtistForm />}
                             {<SelectedArtists />}
 
                             <TuneTrackAttributes />
