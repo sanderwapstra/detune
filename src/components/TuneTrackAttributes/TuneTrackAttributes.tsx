@@ -15,11 +15,8 @@ const TuneTrackAttributes: React.FC = () => {
         target_danceability,
         target_energy,
         target_instrumentalness,
-        target_loudness,
-        target_mode,
         target_popularity,
         target_tempo,
-        target_time_signature,
         target_valence,
     } = useSelector((state: RootState) => state.trackAttributes);
 
@@ -49,7 +46,7 @@ const TuneTrackAttributes: React.FC = () => {
                 <li>
                     <TrackAttributeRange
                         title="Acousticness"
-                        defaultValue={0.5}
+                        defaultValue={target_acousticness.value}
                         disabled={!target_acousticness.active}
                         handleActiveChange={e => {
                             handleChange({
@@ -71,7 +68,7 @@ const TuneTrackAttributes: React.FC = () => {
                 <li>
                     <TrackAttributeRange
                         title="Danceability"
-                        defaultValue={0.5}
+                        defaultValue={target_danceability.value}
                         disabled={!target_danceability.active}
                         handleActiveChange={e => {
                             handleChange({
@@ -93,7 +90,7 @@ const TuneTrackAttributes: React.FC = () => {
                 <li>
                     <TrackAttributeRange
                         title="Energy"
-                        defaultValue={0.5}
+                        defaultValue={target_energy.value}
                         disabled={!target_energy.active}
                         handleActiveChange={e => {
                             handleChange({
@@ -115,7 +112,7 @@ const TuneTrackAttributes: React.FC = () => {
                 <li>
                     <TrackAttributeRange
                         title="Instrumentalness"
-                        defaultValue={0.5}
+                        defaultValue={target_instrumentalness.value}
                         disabled={!target_instrumentalness.active}
                         handleActiveChange={e => {
                             handleChange({
@@ -136,209 +133,73 @@ const TuneTrackAttributes: React.FC = () => {
                         step={0.1}
                     />
                 </li>
-            </ul>
-
-            <div style={{ marginBottom: 10 }}>
-                <label htmlFor="liveness">
-                    <input
-                        type="checkbox"
-                        id="liveness"
-                        name="liveness"
-                        onChange={e => {
+                <li>
+                    <TrackAttributeRange
+                        title="Popularity"
+                        defaultValue={target_popularity.value}
+                        disabled={!target_popularity.active}
+                        handleActiveChange={e => {
                             handleChange({
-                                attribute: TrackAttributesOptions.Liveness,
+                                attribute: TrackAttributesOptions.Popularity,
                                 active: e.target.checked,
                             });
                         }}
-                    />
-                    Liveness
-                </label>
-            </div>
-
-            <div style={{ marginBottom: 10 }}>
-                <input
-                    type="checkbox"
-                    onChange={e => {
-                        handleChange({
-                            attribute: TrackAttributesOptions.Loudness,
-                            active: e.target.checked,
-                        });
-                    }}
-                />
-                <label htmlFor="loudness">Loudness</label>
-                <input
-                    disabled={!target_loudness.active}
-                    type="range"
-                    id="loudness"
-                    name="loudness"
-                    min="-60"
-                    max="0"
-                    value={target_loudness.value}
-                    onChange={e => {
-                        handleChange({
-                            attribute: TrackAttributesOptions.Loudness,
-                            value: Number(e.target.value),
-                        });
-                    }}
-                />
-            </div>
-
-            <div style={{ marginBottom: 10 }}>
-                <input
-                    type="checkbox"
-                    onChange={e => {
-                        handleChange({
-                            attribute: TrackAttributesOptions.Mode,
-                            active: e.target.checked,
-                        });
-                    }}
-                />
-                <span>Mode</span>
-                <div>
-                    <input
-                        disabled={!target_mode.active}
-                        type="radio"
-                        id="major"
-                        name="mode"
-                        value={1}
-                        checked={target_mode.value === 1}
-                        onChange={e => {
+                        handleRangeChange={value => {
                             handleChange({
-                                attribute: TrackAttributesOptions.Mode,
-                                value: Number(e.target.value),
+                                attribute: TrackAttributesOptions.Popularity,
+                                value,
                             });
                         }}
+                        max={100}
+                        min={0}
+                        step={1}
                     />
-                    <label htmlFor="major">Major</label>
-                </div>
-
-                <div>
-                    <input
-                        disabled={!target_mode.active}
-                        type="radio"
-                        id="minor"
-                        name="mode"
-                        value={0}
-                        checked={target_mode.value === 0}
-                        onChange={e => {
+                </li>
+                <li>
+                    <TrackAttributeRange
+                        title="Positiveness"
+                        defaultValue={target_valence.value}
+                        disabled={!target_valence.active}
+                        handleActiveChange={e => {
                             handleChange({
-                                attribute: TrackAttributesOptions.Mode,
-                                value: Number(e.target.value),
+                                attribute: TrackAttributesOptions.Valence,
+                                active: e.target.checked,
                             });
                         }}
+                        handleRangeChange={value => {
+                            handleChange({
+                                attribute: TrackAttributesOptions.Valence,
+                                value,
+                            });
+                        }}
+                        max={1}
+                        min={0}
+                        step={0.1}
                     />
-                    <label htmlFor="minor">Minor</label>
-                </div>
-            </div>
-
-            <div style={{ marginBottom: 10 }}>
-                <input
-                    type="checkbox"
-                    onChange={e => {
-                        handleChange({
-                            attribute: TrackAttributesOptions.Popularity,
-                            active: e.target.checked,
-                        });
-                    }}
-                />
-                <label htmlFor="popularity">Popularity</label>
-                <input
-                    disabled={!target_popularity.active}
-                    type="range"
-                    id="popularity"
-                    name="popularity"
-                    min="0"
-                    max="100"
-                    value={target_popularity.value}
-                    onChange={e => {
-                        handleChange({
-                            attribute: TrackAttributesOptions.Popularity,
-                            value: Number(e.target.value),
-                        });
-                    }}
-                />
-            </div>
-
-            <div style={{ marginBottom: 10 }}>
-                <input
-                    type="checkbox"
-                    onChange={e => {
-                        handleChange({
-                            attribute: TrackAttributesOptions.Tempo,
-                            active: e.target.checked,
-                        });
-                    }}
-                />
-                <label htmlFor="tempo">Tempo (BPM)</label>
-                <input
-                    disabled={!target_tempo.active}
-                    type="number"
-                    id="tempo"
-                    name="tempo"
-                    value={target_tempo.value}
-                    onChange={e => {
-                        handleChange({
-                            attribute: TrackAttributesOptions.Tempo,
-                            value: Number(e.target.value),
-                        });
-                    }}
-                />
-            </div>
-
-            <div style={{ marginBottom: 10 }}>
-                <input
-                    type="checkbox"
-                    onChange={e => {
-                        handleChange({
-                            attribute: TrackAttributesOptions.TimeSignature,
-                            active: e.target.checked,
-                        });
-                    }}
-                />
-                <label htmlFor="time_signature">Time signature</label>
-                <input
-                    disabled={!target_time_signature.active}
-                    type="number"
-                    id="time_signature"
-                    name="time_signature"
-                    value={target_time_signature.value}
-                    onChange={e => {
-                        handleChange({
-                            attribute: TrackAttributesOptions.TimeSignature,
-                            value: Number(e.target.value),
-                        });
-                    }}
-                />
-            </div>
-
-            <div style={{ marginBottom: 10 }}>
-                <input
-                    type="checkbox"
-                    onChange={e => {
-                        handleChange({
-                            attribute: TrackAttributesOptions.Valence,
-                            active: e.target.checked,
-                        });
-                    }}
-                />
-                <label htmlFor="valence">Valence</label>
-                <input
-                    disabled={!target_valence.active}
-                    type="range"
-                    id="valence"
-                    name="valence"
-                    min="0.0"
-                    max="1.0"
-                    value={target_valence.value}
-                    step="0.1"
-                    onChange={e => {
-                        handleChange({
-                            attribute: TrackAttributesOptions.Valence,
-                            value: Number(e.target.value),
-                        });
-                    }}
-                />
-            </div>
+                </li>
+                <li>
+                    <TrackAttributeRange
+                        title="BPM"
+                        defaultValue={target_tempo.value}
+                        disabled={!target_tempo.active}
+                        handleActiveChange={e => {
+                            handleChange({
+                                attribute: TrackAttributesOptions.Tempo,
+                                active: e.target.checked,
+                            });
+                        }}
+                        handleRangeChange={value => {
+                            handleChange({
+                                attribute: TrackAttributesOptions.Tempo,
+                                value,
+                            });
+                        }}
+                        max={400}
+                        min={0}
+                        step={1}
+                    />
+                </li>
+            </ul>
         </StyledTuneTrackAttributes>
     );
 };

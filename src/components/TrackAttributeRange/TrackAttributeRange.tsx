@@ -40,6 +40,7 @@ const TrackAttributeRange: React.FC<Props> = ({
                         id={`checkbox-${title.toLowerCase()}`}
                         type="checkbox"
                         onChange={handleActiveChange}
+                        checked={!disabled}
                     />
                     <label htmlFor={`checkbox-${title.toLowerCase()}`}>
                         <Check />
