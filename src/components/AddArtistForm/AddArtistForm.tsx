@@ -57,8 +57,6 @@ const AddArtistForm: React.FC = () => {
                 }}
             />
 
-            {errors.artist && 'Artist is required'}
-
             <button type="submit">
                 <Search width="32" height="32" />
             </button>
