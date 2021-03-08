@@ -40,7 +40,7 @@ const TuneTrackAttributes: React.FC = () => {
 
     return (
         <StyledTuneTrackAttributes>
-            <h2>Tune</h2>
+            <h2>Start tuning</h2>
 
             <ul>
                 <li>

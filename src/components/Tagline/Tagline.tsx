@@ -3,8 +3,8 @@ import StyledTagline from './Tagline.styles';
 
 const Tagline: React.FC = () => (
     <StyledTagline>
-        Generate <span className="highlight">tailored playlists</span> based on
-        artists you love and tuned to your preferences.
+        Generate <span className="highlight">tuned playlists</span> based on
+        your preferences.
     </StyledTagline>
 );
 
