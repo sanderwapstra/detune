@@ -15,7 +15,7 @@ const AddArtistForm: React.FC = () => {
     const spotifyApi = useRef(new SpotifyWebApi());
     const formRef = useRef<HTMLFormElement | null>(null);
     const inputRef = useRef<HTMLInputElement>();
-    const { register, handleSubmit, errors } = useForm();
+    const { register, handleSubmit } = useForm();
 
     const onSubmit = async (data: any) => {
         const [err, results] = await to(
