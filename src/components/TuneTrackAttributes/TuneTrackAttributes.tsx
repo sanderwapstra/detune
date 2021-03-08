@@ -1,16 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Range } from 'react-range';
 import { RootState } from '../../store/reducers';
 import {
     setTrackAttribute,
     TrackAttributesOptions,
 } from '../../store/trackAttributesSlice';
+import TrackAttributeRange from '../TrackAttributeRange/TrackAttributeRange';
 import StyledTuneTrackAttributes from './TuneTrackAttributes.styles';
 
 const TuneTrackAttributes: React.FC = () => {
-    const [values, setValues] = useState([0.5]);
-    const [isDisabled, setIsDisabled] = useState(false);
     const dispatch = useDispatch();
     const {
         target_acousticness,
@@ -47,52 +45,98 @@ const TuneTrackAttributes: React.FC = () => {
         <StyledTuneTrackAttributes>
             <h2>Tune</h2>
 
-            <div className={`range ${isDisabled ? 'range--is-disabled' : ''}`}>
-                <Range
-                    disabled={isDisabled}
-                    values={values}
-                    step={0.1}
-                    min={0}
-                    max={1}
-                    onChange={values => setValues(values)}
-                    renderTrack={({ props, children }) => (
-                        <div
-                            {...props}
-                            style={{
-                                ...props.style,
-                                height: '6px',
-                                width: '100%',
-                                backgroundColor: 'transparent',
-                            }}
-                        >
-                            {children}
-                        </div>
-                    )}
-                    renderThumb={({ props }) => (
-                        <div
-                            className="range-background"
-                            {...props}
-                            style={{
-                                ...props.style,
-                                height: 40,
-                                width: 24,
-                                backgroundColor: 'transparent',
-                                boxShadow:
-                                    '0 8px 24px rgba(0, 0, 0, 0.75), inset 1px 1px 4px rgba(0, 0, 0, 0.15)',
-
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                            }}
-                        >
-                            <div className="range-background-left" />
-                            <div className="range-background-right" />
-                            <div className="range-background-inner" />
-                            <div className="range-background-center" />
-                        </div>
-                    )}
-                />
-            </div>
+            <ul>
+                <li>
+                    <TrackAttributeRange
+                        title="Acousticness"
+                        defaultValue={0.5}
+                        disabled={!target_acousticness.active}
+                        handleActiveChange={e => {
+                            handleChange({
+                                attribute: TrackAttributesOptions.Acousticness,
+                                active: e.target.checked,
+                            });
+                        }}
+                        handleRangeChange={value => {
+                            handleChange({
+                                attribute: TrackAttributesOptions.Acousticness,
+                                value,
+                            });
+                        }}
+                        max={1}
+                        min={0}
+                        step={0.1}
+                    />
+                </li>
+                <li>
+                    <TrackAttributeRange
+                        title="Danceability"
+                        defaultValue={0.5}
+                        disabled={!target_danceability.active}
+                        handleActiveChange={e => {
+                            handleChange({
+                                attribute: TrackAttributesOptions.Danceability,
+                                active: e.target.checked,
+                            });
+                        }}
+                        handleRangeChange={value => {
+                            handleChange({
+                                attribute: TrackAttributesOptions.Danceability,
+                                value,
+                            });
+                        }}
+                        max={1}
+                        min={0}
+                        step={0.1}
+                    />
+                </li>
+                <li>
+                    <TrackAttributeRange
+                        title="Energy"
+                        defaultValue={0.5}
+                        disabled={!target_energy.active}
+                        handleActiveChange={e => {
+                            handleChange({
+                                attribute: TrackAttributesOptions.Energy,
+                                active: e.target.checked,
+                            });
+                        }}
+                        handleRangeChange={value => {
+                            handleChange({
+                                attribute: TrackAttributesOptions.Energy,
+                                value,
+                            });
+                        }}
+                        max={1}
+                        min={0}
+                        step={0.1}
+                    />
+                </li>
+                <li>
+                    <TrackAttributeRange
+                        title="Instrumentalness"
+                        defaultValue={0.5}
+                        disabled={!target_instrumentalness.active}
+                        handleActiveChange={e => {
+                            handleChange({
+                                attribute:
+                                    TrackAttributesOptions.Instrumentalness,
+                                active: e.target.checked,
+                            });
+                        }}
+                        handleRangeChange={value => {
+                            handleChange({
+                                attribute:
+                                    TrackAttributesOptions.Instrumentalness,
+                                value,
+                            });
+                        }}
+                        max={1}
+                        min={0}
+                        step={0.1}
+                    />
+                </li>
+            </ul>
 
             <div style={{ marginBottom: 10 }}>
                 <label htmlFor="liveness">
