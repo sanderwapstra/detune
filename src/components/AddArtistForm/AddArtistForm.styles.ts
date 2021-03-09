@@ -1,29 +1,19 @@
 import styled from 'styled-components';
+import { StyledFormControl } from '../Form/Form.styles';
 
 const StyledAddArtistForm = styled.form`
-    position: relative;
-    margin-bottom: 32px;
+    .search {
+        position: relative;
 
-    input {
-        border: 0;
-        padding: 24px 32px;
-        width: 100%;
-        display: block;
-        background: #333;
-        border-radius: 8px;
-        font-weight: 700;
-        font-size: 24px;
-        color: #fff;
-
-        &::placeholder {
-            color: #fff;
+        ${StyledFormControl} {
+            padding-left: 56px;
         }
     }
 
     button {
         position: absolute;
         top: 50%;
-        right: 24px;
+        left: 20px;
         background: none;
         transform: translateY(-50%);
         padding: 0;
@@ -34,6 +24,10 @@ const StyledAddArtistForm = styled.form`
             display: block;
             fill: #fff;
         }
+    }
+
+    .highlight {
+        color: #87fa5f;
     }
 `;
 

@@ -7,6 +7,13 @@ import SpotifyWebApi from 'spotify-web-api-js';
 import { ReactComponent as Search } from '../../static/svg/Search.svg';
 import { addArtist } from '../../store/artistsSlice';
 import { RootState } from '../../store/reducers';
+import {
+    StyledForm,
+    StyledFormControl,
+    StyledFormGroup,
+    StyledFormHelpText,
+    StyledFormLabel,
+} from '../Form/Form.styles';
 import StyledAddArtistForm from './AddArtistForm.styles';
 
 const AddArtistForm: React.FC = () => {
@@ -41,25 +48,47 @@ const AddArtistForm: React.FC = () => {
 
     return (
         <StyledAddArtistForm ref={formRef} onSubmit={handleSubmit(onSubmit)}>
-            <input
-                disabled={artists.length >= 5}
-                type="text"
-                placeholder="Search for an artists name"
-                name="artist"
-                ref={e => {
-                    if (e) {
-                        register(e, {
-                            required: true,
-                        });
+            <StyledForm>
+                <StyledFormGroup>
+                    <StyledFormLabel htmlFor="artist">
+                        Add up to <span className="highlight">5</span> artists
+                    </StyledFormLabel>
+                    <StyledFormHelpText>
+                        Need some inspiration? How about exploring{' '}
+                        <a href="#" className="highlight">
+                            Mexico City&rsquo;s Acid House
+                        </a>{' '}
+                        or{' '}
+                        <a href="#" className="highlight">
+                            Ireland&rsquo;s Hip-Hop Scene
+                        </a>
+                        ?
+                    </StyledFormHelpText>
 
-                        inputRef.current = e;
-                    }
-                }}
-            />
+                    <div className="search">
+                        <StyledFormControl
+                            id="artist"
+                            disabled={artists.length >= 5}
+                            type="text"
+                            placeholder="Search for an artists name"
+                            name="artist"
+                            ref={e => {
+                                if (e) {
+                                    register(e, {
+                                        required: true,
+                                    });
 
-            <button type="submit">
-                <Search width="32" height="32" />
-            </button>
+                                    inputRef.current = e;
+                                }
+                            }}
+                        />
+
+                        <button type="submit">
+                            <Search width="32" height="32" />
+                        </button>
+                    </div>
+                </StyledFormGroup>
+            </StyledForm>
         </StyledAddArtistForm>
     );
 };

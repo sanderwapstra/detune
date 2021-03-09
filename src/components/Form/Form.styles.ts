@@ -15,6 +15,12 @@ const StyledFormLabel = styled.label`
     ${map(typography.h2, (fontSize: string) => `font-size: ${fontSize};`)};
 `;
 
+const StyledFormHelpText = styled.div`
+    font-size: 18px;
+    margin-bottom: 24px;
+    margin-top: -8px;
+`;
+
 const StyledFormControl = styled.input`
     display: block;
     width: 100%;
@@ -37,6 +43,7 @@ export {
     StyledForm,
     StyledFormGroup,
     StyledFormLabel,
+    StyledFormHelpText,
     StyledFormControl,
     StyledFormActions,
     StyledFormError,
