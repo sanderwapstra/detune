@@ -12,7 +12,7 @@ const Profile: React.FC = () => {
         <StyledProfile>
             <StyledProfileTitle>
                 Hi, <span className="highlight">{user.display_name}</span>!
-                Let&rsquo;s generate your tailored playlist.
+                Let&rsquo;s generate your tuned playlist.
             </StyledProfileTitle>
         </StyledProfile>
     );
