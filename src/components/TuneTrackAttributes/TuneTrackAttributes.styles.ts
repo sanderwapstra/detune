@@ -3,6 +3,8 @@ import { map } from 'styled-components-breakpoint';
 import { typography } from '../../styles/typography';
 
 const StyledTuneTrackAttributes = styled.div`
+    margin-bottom: 16px;
+
     h2 {
         line-height: 1.5;
         margin-bottom: 24px;

@@ -1,5 +1,5 @@
 import to from 'await-to-js';
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import ReactGA from 'react-ga';
 import { useSelector } from 'react-redux';
 import SpotifyWebApi from 'spotify-web-api-js';
@@ -9,16 +9,12 @@ import StyledGeneratePlaylist from './GeneratePlaylist.styles';
 
 const GeneratePlaylist: React.FC = () => {
     const spotifyApi = useRef(new SpotifyWebApi());
-    const [name, setName] = useState('');
     const { user } = useSelector((state: RootState) => state.app);
     const artists = useSelector((state: RootState) => state.artists);
     const trackAttributes = useSelector(
         (state: RootState) => state.trackAttributes
     );
-
-    const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setName(e.target.value);
-    };
+    const { name } = useSelector((state: RootState) => state.playlist);
 
     const getPlayListTitle = () => {
         return name ? `${name} :: Detune.fm` : 'Playlist by Detune.fm';
@@ -119,23 +115,9 @@ const GeneratePlaylist: React.FC = () => {
 
     return (
         <StyledGeneratePlaylist>
-            <h2>Generate playlist</h2>
-
-            <div style={{ marginBottom: '10px' }}>
-                <label htmlFor="playlistName">Name you playlist</label>
-                <input
-                    id="playlistName"
-                    type="text"
-                    value={name}
-                    onChange={handleNameChange}
-                />
-            </div>
-
-            <div className="actions">
-                <Button disabled={!artists.length} click={getRecommendations}>
-                    Generate playlist
-                </Button>
-            </div>
+            <Button disabled={!artists.length} click={getRecommendations}>
+                Generate playlist
+            </Button>
         </StyledGeneratePlaylist>
     );
 };

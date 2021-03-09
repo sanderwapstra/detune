@@ -1,12 +1,31 @@
 import styled from 'styled-components';
+import { map } from 'styled-components-breakpoint';
+import { typography } from '../../styles/typography';
 
-const StyledForm = styled.form``;
+const StyledForm = styled.form`
+    margin-bottom: 60px;
+`;
 
 const StyledFormGroup = styled.div``;
 
-const StyledFormLabel = styled.label``;
+const StyledFormLabel = styled.label`
+    display: block;
+    margin-bottom: 20px;
 
-const StyledFormControl = styled.input<{ $error?: boolean }>``;
+    ${map(typography.h2, (fontSize: string) => `font-size: ${fontSize};`)};
+`;
+
+const StyledFormControl = styled.input`
+    display: block;
+    width: 100%;
+    background-color: #000;
+    border: 1px solid #3b484d;
+    border-radius: 8px;
+    font-size: 24px;
+    line-height: 1.25;
+    padding: 20px 36px;
+    color: #fff;
+`;
 
 const StyledFormActions = styled.div``;
 

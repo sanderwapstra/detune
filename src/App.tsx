@@ -9,6 +9,7 @@ import AddArtistForm from './components/AddArtistForm/AddArtistForm';
 import GeneratePlaylist from './components/GeneratePlaylist/GeneratePlaylist';
 import Login from './components/Login/Login';
 import Logo from './components/Logo/Logo';
+import PlaylistName from './components/PlaylistName/PlaylistName';
 import Profile from './components/Profile/Profile';
 import SelectedArtists from './components/SelectedArtists/SelectedArtists';
 import TuneTrackAttributes from './components/TuneTrackAttributes/TuneTrackAttributes';
@@ -78,10 +79,9 @@ function App() {
                     <Row>
                         <Col>
                             <Profile />
-
-                            {<AddArtistForm />}
-                            {<SelectedArtists />}
-
+                            <PlaylistName />
+                            <AddArtistForm />
+                            <SelectedArtists />
                             <TuneTrackAttributes />
                             <GeneratePlaylist />
                         </Col>
