@@ -3,7 +3,6 @@ import React, { useRef, useState } from 'react';
 import ReactGA from 'react-ga';
 import Modal from 'react-modal';
 import { useSelector } from 'react-redux';
-import 'rodal/lib/rodal.css';
 import SpotifyWebApi from 'spotify-web-api-js';
 import { RootState } from '../../store/reducers';
 import Button from '../Button/Button';
