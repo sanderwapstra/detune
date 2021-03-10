@@ -16,7 +16,9 @@ const Button: React.FC<Props> = ({
     children,
 }) => {
     return href ? (
-        <StyledButton as="a">{children}</StyledButton>
+        <StyledButton href={href} as="a">
+            {children}
+        </StyledButton>
     ) : (
         <StyledButton disabled={disabled} type={type} onClick={click}>
             {children}

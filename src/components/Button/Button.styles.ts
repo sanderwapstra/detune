@@ -14,6 +14,7 @@ const StyledButton = styled.button`
     border-radius: 28px;
     padding: 16px 32px;
     cursor: pointer;
+    text-decoration: none;
 
     ${map(typography.button, (fontSize: string) => `font-size: ${fontSize};`)};
 

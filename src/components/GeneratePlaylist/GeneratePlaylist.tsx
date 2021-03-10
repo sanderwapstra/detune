@@ -13,7 +13,7 @@ Modal.setAppElement('#root');
 
 const GeneratePlaylist: React.FC = () => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
-    const playlistUri = useRef('');
+    const [playlistUri, setPlaylistUri] = useState('');
     const spotifyApi = useRef(new SpotifyWebApi());
     const { user } = useSelector((state: RootState) => state.app);
     const artists = useSelector((state: RootState) => state.artists);
@@ -122,8 +122,7 @@ const GeneratePlaylist: React.FC = () => {
             const playlist = await createPlaylist();
 
             if (playlist) {
-                playlistUri.current = playlist.uri;
-
+                setPlaylistUri(playlist.uri);
                 addTracksToPlaylist(playlist, recommendations);
             }
         }
@@ -159,7 +158,7 @@ const GeneratePlaylist: React.FC = () => {
                 }}
             >
                 <h2>Your playlist is ready</h2>
-                <Button href={playlistUri.current}>Open Spotify</Button>
+                <Button href={playlistUri}>Open Spotify</Button>
             </Modal>
         </StyledGeneratePlaylist>
     );
