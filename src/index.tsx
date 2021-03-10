@@ -6,11 +6,13 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { BaseCSS, GridThemeProvider } from 'styled-bootstrap-grid';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import { map } from 'styled-components-breakpoint';
 import { Normalize } from 'styled-normalize';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { persistor, store } from './store/store';
-import { theme, gridTheme } from './styles/theme';
+import { gridTheme, theme } from './styles/theme';
+import { typography } from './styles/typography';
 
 LogRocket.init('bhxbik/detune');
 ReactGA.initialize('UA-167595336-1');
@@ -41,6 +43,29 @@ const GlobalStyle = createGlobalStyle`
     fieldset,
     hr {
         margin: 0;
+    }
+
+    h1 {
+        ${map(typography.h2, (fontSize: string) => `font-size: ${fontSize};`)};
+
+        line-height: 1.25;
+    }
+
+    h2 {
+        ${map(typography.h2, (fontSize: string) => `font-size: ${fontSize};`)};
+
+        line-height: 1.25;
+        margin-bottom: 20px;
+    }
+
+    h3 {
+        ${map(typography.h3, (fontSize: string) => `font-size: ${fontSize};`)};
+
+        line-height: 1.5;
+    }
+
+    .ReactModal__Body--open #root {
+        filter: blur(2px);
     }
 `;
 

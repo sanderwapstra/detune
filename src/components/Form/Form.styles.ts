@@ -12,7 +12,7 @@ const StyledFormLabel = styled.label`
     display: block;
     margin-bottom: 20px;
 
-    ${map(typography.h2, (fontSize: string) => `font-size: ${fontSize};`)};
+    ${map(typography.h3, (fontSize: string) => `font-size: ${fontSize};`)};
 `;
 
 const StyledFormHelpText = styled.div`

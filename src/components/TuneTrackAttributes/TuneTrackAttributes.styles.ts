@@ -9,7 +9,7 @@ const StyledTuneTrackAttributes = styled.div`
         line-height: 1.5;
         margin-bottom: 24px;
 
-        ${map(typography.h2, (fontSize: string) => `font-size: ${fontSize};`)};
+        ${map(typography.h3, (fontSize: string) => `font-size: ${fontSize};`)};
     }
 
     ul {
