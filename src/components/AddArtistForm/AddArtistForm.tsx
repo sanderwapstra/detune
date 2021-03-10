@@ -38,7 +38,7 @@ const AddArtistForm: React.FC = () => {
             action: 'User added an artist',
         });
 
-        if (results?.artists?.items) {
+        if (results && results.artists && results.artists.items.length > 0) {
             dispatch(addArtist(results.artists.items[0]));
 
             formRef.current?.reset();
