@@ -62,6 +62,7 @@ const GlobalStyle = createGlobalStyle`
         ${map(typography.h3, (fontSize: string) => `font-size: ${fontSize};`)};
 
         line-height: 1.5;
+        margin-bottom: 12px;
     }
 
     .ReactModal__Body--open #root {

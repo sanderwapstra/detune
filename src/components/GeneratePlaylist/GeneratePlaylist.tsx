@@ -156,7 +156,7 @@ const GeneratePlaylist: React.FC = () => {
                     },
                 }}
             >
-                <h2>Your playlist is ready</h2>
+                <h3>Your playlist is ready</h3>
                 <Button href={playlistUri}>Open Spotify</Button>
             </Modal>
         </StyledGeneratePlaylist>
