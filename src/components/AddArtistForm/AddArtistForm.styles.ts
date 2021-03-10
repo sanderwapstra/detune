@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { StyledFormControl } from '../Form/Form.styles';
 
-const StyledAddArtistForm = styled.form`
+const StyledAddArtistForm = styled.div`
     .search {
         position: relative;
 

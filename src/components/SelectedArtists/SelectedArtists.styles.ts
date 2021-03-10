@@ -44,12 +44,22 @@ const StyledSelectedArtists = styled.div`
         }
     }
 
-    img {
-        display: block;
-        width: 100%;
-        height: auto;
-        border-radius: 16px;
+    .image {
+        position: relative;
+        height: 0;
+        padding-top: 100%;
+        overflow: hidden;
         margin-bottom: 8px;
+    }
+
+    img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 16px;
     }
 
     .placeholder {

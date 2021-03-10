@@ -15,12 +15,9 @@ const SelectedArtists: React.FC = () => {
 
     const renderArtist = (artist: SpotifyApi.ArtistObjectFull) => (
         <li key={artist.id}>
-            <img
-                src={artist.images[0].url}
-                alt={`${artist.name}`}
-                width="180"
-                height="180"
-            />
+            <div className="image">
+                <img src={artist.images[0].url} alt={`${artist.name}`} />
+            </div>
             <div className="info">
                 <div className="name">{artist.name}</div>
                 <button

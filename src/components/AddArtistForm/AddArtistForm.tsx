@@ -47,19 +47,19 @@ const AddArtistForm: React.FC = () => {
     };
 
     return (
-        <StyledAddArtistForm ref={formRef} onSubmit={handleSubmit(onSubmit)}>
-            <StyledForm>
+        <StyledAddArtistForm>
+            <StyledForm ref={formRef} onSubmit={handleSubmit(onSubmit)}>
                 <StyledFormGroup>
                     <StyledFormLabel htmlFor="artist">
                         Add up to <span className="highlight">5</span> artists
                     </StyledFormLabel>
                     <StyledFormHelpText>
                         Need some inspiration? How about exploring{' '}
-                        <a href="#" className="highlight">
+                        <a href="/#" className="highlight">
                             Mexico City&rsquo;s Acid House
                         </a>{' '}
                         or{' '}
-                        <a href="#" className="highlight">
+                        <a href="/#" className="highlight">
                             Ireland&rsquo;s Hip-Hop Scene
                         </a>
                         ?
