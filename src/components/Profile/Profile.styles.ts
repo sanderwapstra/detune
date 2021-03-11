@@ -1,3 +1,4 @@
+import { media } from 'styled-bootstrap-grid';
 import styled from 'styled-components';
 import { map } from 'styled-components-breakpoint';
 import { typography } from '../../styles/typography';
@@ -5,7 +6,11 @@ import { typography } from '../../styles/typography';
 const StyledProfile = styled.div`
     display: flex;
     align-items: center;
-    padding: 200px 0 64px;
+    padding: 120px 0 16px;
+
+    ${media.sm`
+        padding: 200px 0 64px;
+    `}
 
     .highlight {
         color: #87fa5f;

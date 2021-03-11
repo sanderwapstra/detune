@@ -1,3 +1,4 @@
+import { media } from 'styled-bootstrap-grid';
 import styled from 'styled-components';
 import { map } from 'styled-components-breakpoint';
 import { typography } from '../../styles/typography';
@@ -13,16 +14,23 @@ const StyledTuneTrackAttributes = styled.div`
     }
 
     ul {
-        display: flex;
-        flex-wrap: wrap;
         list-style: none;
-        margin: 0 -12px;
         padding: 0;
+
+        ${media.sm`
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -12px;
+        `}
     }
 
     li {
-        width: calc(50% - 24px);
-        margin: 0 12px 32px;
+        margin-bottom: 32px;
+
+        ${media.sm`
+            width: calc(50% - 24px);
+            margin: 0 12px 32px;
+        `}
     }
 `;
 

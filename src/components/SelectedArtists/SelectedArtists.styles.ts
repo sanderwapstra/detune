@@ -1,21 +1,36 @@
+import { media } from 'styled-bootstrap-grid';
 import styled from 'styled-components';
 
 const StyledSelectedArtists = styled.div`
-    margin-bottom: 48px;
+    margin-bottom: 24px;
+
+    ${media.sm`
+        margin-bottom: 48px;
+    `}
 
     ol {
         list-style: none;
         padding-left: 0;
         display: flex;
         flex-wrap: wrap;
-        margin: 0 -16px;
-        width: calc(100% + 32px);
+        margin: 0 -8px;
+        width: calc(100% + 16px);
+
+        ${media.sm`
+            margin: 0 -16px;
+            width: calc(100% + 32px);
+        `}
     }
 
     li {
         position: relative;
-        width: calc(20% - 32px);
-        margin: 0 16px;
+        width: calc(33.33% - 16px);
+        margin: 0 8px 16px;
+
+        ${media.sm`
+            width: calc(20% - 32px);
+            margin: 0 16px;
+        `}
     }
 
     .info {
@@ -65,8 +80,12 @@ const StyledSelectedArtists = styled.div`
     .placeholder {
         border-radius: 16px;
         height: 0;
-        padding-bottom: calc(20% - 32px);
+        padding-bottom: calc(33.33% - 16px);
         border: 1px solid #3b484d;
+
+        ${media.sm`
+            padding-bottom: calc(20% - 32px);
+        `}
     }
 `;
 
