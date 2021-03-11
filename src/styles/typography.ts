@@ -1,7 +1,7 @@
 export const typography = {
     h1: {
-        xs: '40px',
-        sm: '52px',
+        xs: '42px',
+        sm: '53px',
         md: '64px',
     },
     h2: {

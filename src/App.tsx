@@ -88,7 +88,7 @@ function App() {
                     </Row>
                 ) : (
                     <Row>
-                        <Col sm={10} smOffset={1}>
+                        <Col md={10} mdOffset={1}>
                             <Login />
                         </Col>
                     </Row>
