@@ -49,6 +49,7 @@ const GeneratePlaylist: React.FC = () => {
             action: name
                 ? 'User has chosen a custom name'
                 : 'User did not chose a custom name',
+            label: name || undefined,
         });
 
         const [err, playlist] = await to(

@@ -33,12 +33,13 @@ const AddArtistForm: React.FC = () => {
             console.error(`❌ Adding artist failed: ${err}`);
         }
 
-        ReactGA.event({
-            category: 'Artists',
-            action: 'User added an artist',
-        });
-
         if (results && results.artists && results.artists.items.length > 0) {
+            ReactGA.event({
+                category: 'Artists',
+                action: 'User added an artist',
+                label: results.artists.items[0].name,
+            });
+
             dispatch(addArtist(results.artists.items[0]));
 
             formRef.current?.reset();
