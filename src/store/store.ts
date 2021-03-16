@@ -19,7 +19,14 @@ const store = configureStore({
             // https://github.com/rt2zz/redux-persist/issues/988
             serializableCheck: false,
         }),
-        LogRocket.reduxMiddleware(),
+        LogRocket.reduxMiddleware({
+            actionSanitizer: function (action) {
+                if (action.type.includes('app/')) {
+                    return null;
+                }
+                return action;
+            },
+        }),
     ],
 });
 

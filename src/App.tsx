@@ -13,13 +13,18 @@ import PlaylistName from './components/PlaylistName/PlaylistName';
 import Profile from './components/Profile/Profile';
 import SelectedArtists from './components/SelectedArtists/SelectedArtists';
 import TuneTrackAttributes from './components/TuneTrackAttributes/TuneTrackAttributes';
-import { setToken, setUser } from './store/appSlice';
+import { resetUser, setToken, setUser } from './store/appSlice';
 import { RootState } from './store/reducers';
 
 function App() {
     const dispatch = useDispatch();
     const spotifyApi = useRef(new SpotifyWebApi());
     const { token, user } = useSelector((state: RootState) => state.app);
+
+    const clearUser = () => {
+        dispatch(resetUser());
+        localStorage.removeItem('stateKey');
+    };
 
     // Save token after first login
     useEffect(() => {
@@ -30,6 +35,8 @@ function App() {
             const storedState = localStorage.getItem('stateKey');
 
             if (access_token && (state == null || state !== storedState)) {
+                clearUser();
+
                 console.error(
                     '❌ There was an error during the authentication'
                 );
@@ -52,9 +59,7 @@ function App() {
             const [err, user] = await to(spotifyApi.current.getMe());
 
             if (err) {
-                // Clear local data
-                window.localStorage.removeItem('persist:root');
-                localStorage.removeItem('stateKey');
+                clearUser();
 
                 console.error(`❌ Something went wrong: ${err}`);
             }

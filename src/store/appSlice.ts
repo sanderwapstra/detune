@@ -18,9 +18,13 @@ const appSlice = createSlice({
         setUser: (state, action) => {
             state.user = action.payload;
         },
+        resetUser: state => {
+            state.token = null;
+            state.user = null;
+        },
     },
 });
 
-export const { setToken, setUser } = appSlice.actions;
+export const { setToken, setUser, resetUser } = appSlice.actions;
 
 export default appSlice.reducer;
