@@ -59,7 +59,7 @@ const GeneratePlaylist: React.FC = () => {
         );
 
         if (err) {
-            console.error(`❌ Something went wrong: ${err}`);
+            console.error(`❌ Creating playlist failed: ${err}`);
         }
 
         return playlist;
@@ -77,7 +77,7 @@ const GeneratePlaylist: React.FC = () => {
         );
 
         if (err) {
-            console.error(`❌ Something went wrong: ${err}`);
+            console.error(`❌ Adding track to playlist failed: ${err}`);
         } else {
             openModal();
         }
@@ -114,7 +114,7 @@ const GeneratePlaylist: React.FC = () => {
         );
 
         if (err) {
-            console.error(`❌ Something went wrong: ${err}`);
+            console.error(`❌ Getting recommendations failed: ${err}`);
         }
 
         if (recommendations) {

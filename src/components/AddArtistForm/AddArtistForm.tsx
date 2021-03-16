@@ -30,7 +30,7 @@ const AddArtistForm: React.FC = () => {
         );
 
         if (err) {
-            console.error(`❌ Something went wrong: ${err}`);
+            console.error(`❌ Adding artist failed: ${err}`);
         }
 
         ReactGA.event({

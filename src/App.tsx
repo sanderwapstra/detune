@@ -37,9 +37,7 @@ function App() {
             if (access_token && (state == null || state !== storedState)) {
                 clearUser();
 
-                console.error(
-                    '❌ There was an error during the authentication'
-                );
+                console.error('❌ Authentication failed');
             } else {
                 if (access_token) {
                     dispatch(setToken(access_token));
@@ -53,6 +51,9 @@ function App() {
     useEffect(() => {
         const setAccessToken = () => {
             spotifyApi.current.setAccessToken(token);
+
+            const noHashURL = window.location.href.replace(/#.*$/, '');
+            window.history.replaceState('', document.title, noHashURL);
         };
 
         const getUser = async () => {
@@ -60,8 +61,6 @@ function App() {
 
             if (err) {
                 clearUser();
-
-                console.error(`❌ Something went wrong: ${err}`);
             }
 
             if (user) {
