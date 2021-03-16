@@ -17,6 +17,14 @@ import { typography } from './styles/typography';
 LogRocket.init('bhxbik/detune');
 ReactGA.initialize('UA-167595336-1');
 
+// Connect GA to LogRocket
+LogRocket.getSessionURL(function (sessionURL) {
+    ReactGA.event({
+        category: 'LogRocket',
+        action: sessionURL,
+    });
+});
+
 const GlobalStyle = createGlobalStyle`
     body {
         font-family: 'Nunito', sans-serif;
