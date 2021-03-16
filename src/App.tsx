@@ -1,6 +1,6 @@
 import to from 'await-to-js';
 import queryString from 'query-string';
-import React, { useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import SpotifyWebApi from 'spotify-web-api-js';
 import { Col, Container, Row } from 'styled-bootstrap-grid';
@@ -21,10 +21,10 @@ function App() {
     const spotifyApi = useRef(new SpotifyWebApi());
     const { token, user } = useSelector((state: RootState) => state.app);
 
-    const clearUser = () => {
+    const clearUser = useCallback(() => {
         dispatch(resetUser());
         localStorage.removeItem('stateKey');
-    };
+    }, [dispatch]);
 
     // Save token after first login
     useEffect(() => {
@@ -46,7 +46,7 @@ function App() {
                 }
             }
         }
-    }, [dispatch, token]);
+    }, [dispatch, token, clearUser]);
 
     // Set access token after getting token
     // Save user info to Redux
@@ -73,7 +73,7 @@ function App() {
             setAccessToken();
             getUser();
         }
-    }, [dispatch, token]);
+    }, [dispatch, token, clearUser]);
 
     return (
         <StyledApp>
