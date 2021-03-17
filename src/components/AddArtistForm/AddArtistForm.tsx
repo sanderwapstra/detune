@@ -1,7 +1,8 @@
 import to from 'await-to-js';
-import React, { useRef } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import ReactGA from 'react-ga';
 import { useForm } from 'react-hook-form';
+import debounce from 'lodash.debounce';
 import { useDispatch, useSelector } from 'react-redux';
 import SpotifyWebApi from 'spotify-web-api-js';
 import { ReactComponent as Search } from '../../static/svg/Search.svg';
@@ -21,12 +22,29 @@ const AddArtistForm: React.FC = () => {
     const dispatch = useDispatch();
     const spotifyApi = useRef(new SpotifyWebApi());
     const formRef = useRef<HTMLFormElement | null>(null);
-    const inputRef = useRef<HTMLInputElement>();
-    const { register, handleSubmit } = useForm();
+    const inputRef = useRef<HTMLInputElement | null>(null);
+    const [options, setOptions] = useState<SpotifyApi.ArtistObjectFull[]>([]);
+    const [loading, setLoading] = useState(false);
+    const [inputValue, setInputValue] = useState('');
 
-    const onSubmit = async (data: any) => {
+    const debouncedSave = useCallback(
+        debounce((newValue: string) => searchArtist(newValue), 1000),
+        []
+    );
+
+    const updateValue = (newValue: string) => {
+        setInputValue(newValue);
+
+        if (newValue.length > 2) {
+            debouncedSave(newValue);
+        }
+    };
+
+    const searchArtist = async (artist: string) => {
+        setLoading(true);
+
         const [err, results] = await to(
-            spotifyApi.current.search(data.artist, ['artist'])
+            spotifyApi.current.search(artist, ['artist'])
         );
 
         if (err) {
@@ -34,22 +52,17 @@ const AddArtistForm: React.FC = () => {
         }
 
         if (results && results.artists && results.artists.items.length > 0) {
-            ReactGA.event({
-                category: 'Artists',
-                action: 'User added an artist',
-                label: results.artists.items[0].name,
-            });
-
-            dispatch(addArtist(results.artists.items[0]));
-
-            formRef.current?.reset();
-            inputRef.current?.focus();
+            setOptions(results.artists.items);
+        } else {
+            setOptions([]);
         }
+
+        setLoading(false);
     };
 
     return (
         <StyledAddArtistForm>
-            <StyledForm ref={formRef} onSubmit={handleSubmit(onSubmit)}>
+            <StyledForm ref={formRef}>
                 <StyledFormGroup>
                     <StyledFormLabel htmlFor="artist">
                         Add up to <span className="highlight">5</span> artists
@@ -68,21 +81,39 @@ const AddArtistForm: React.FC = () => {
 
                     <div className="search">
                         <StyledFormControl
+                            ref={inputRef}
                             id="artist"
                             disabled={artists.length >= 5}
                             type="text"
+                            value={inputValue}
+                            onChange={input => updateValue(input.target.value)}
                             placeholder="Search for an artists name"
-                            name="artist"
-                            ref={e => {
-                                if (e) {
-                                    register(e, {
-                                        required: true,
-                                    });
-
-                                    inputRef.current = e;
-                                }
-                            }}
                         />
+
+                        <ul>
+                            {loading && <li>Loading...</li>}
+                            {options.length > 0 &&
+                                !loading &&
+                                options.map((value, index) => (
+                                    <li
+                                        key={value.id}
+                                        onClick={() => {
+                                            ReactGA.event({
+                                                category: 'Artists',
+                                                action: 'User added an artist',
+                                                label: value.name,
+                                            });
+
+                                            dispatch(addArtist(value));
+                                            updateValue('');
+                                            inputRef.current?.focus();
+                                            setOptions([]);
+                                        }}
+                                    >
+                                        {value.name}
+                                    </li>
+                                ))}
+                        </ul>
 
                         <button type="submit">
                             <Search width="32" height="32" />
