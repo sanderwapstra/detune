@@ -1,8 +1,7 @@
 import to from 'await-to-js';
+import debounce from 'lodash.debounce';
 import React, { useCallback, useRef, useState } from 'react';
 import ReactGA from 'react-ga';
-import { useForm } from 'react-hook-form';
-import debounce from 'lodash.debounce';
 import { useDispatch, useSelector } from 'react-redux';
 import SpotifyWebApi from 'spotify-web-api-js';
 import { ReactComponent as Search } from '../../static/svg/Search.svg';
