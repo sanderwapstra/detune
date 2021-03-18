@@ -14,7 +14,18 @@ import { persistor, store } from './store/store';
 import { gridTheme, theme } from './styles/theme';
 import { typography } from './styles/typography';
 
-LogRocket.init('bhxbik/detune');
+LogRocket.init('bhxbik/detune', {
+    network: {
+        requestSanitizer: request => {
+            if (request.url.includes('api.spotify.com')) {
+                return null;
+            }
+
+            return request;
+        },
+    },
+});
+
 ReactGA.initialize('UA-167595336-1');
 
 // Connect GA to LogRocket
