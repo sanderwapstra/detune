@@ -20,14 +20,11 @@ const AddArtistForm: React.FC = () => {
     const artists = useSelector((state: RootState) => state.artists);
     const dispatch = useDispatch();
     const spotifyApi = useRef(new SpotifyWebApi());
-    const formRef = useRef<HTMLFormElement | null>(null);
-    const inputRef = useRef<HTMLInputElement | null>(null);
     const [options, setOptions] = useState<SpotifyApi.ArtistObjectFull[]>([]);
-    const [loading, setLoading] = useState(false);
     const [inputValue, setInputValue] = useState('');
 
     const debouncedSave = useCallback(
-        debounce((newValue: string) => searchArtist(newValue), 1000),
+        debounce((newValue: string) => searchArtist(newValue), 450),
         []
     );
 
@@ -36,12 +33,12 @@ const AddArtistForm: React.FC = () => {
 
         if (newValue.length > 2) {
             debouncedSave(newValue);
+        } else {
+            setOptions([]);
         }
     };
 
     const searchArtist = async (artist: string) => {
-        setLoading(true);
-
         const [err, results] = await to(
             spotifyApi.current.search(artist, ['artist'])
         );
@@ -55,13 +52,27 @@ const AddArtistForm: React.FC = () => {
         } else {
             setOptions([]);
         }
+    };
 
-        setLoading(false);
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+
+        if (options.length > 0) {
+            ReactGA.event({
+                category: 'Artists',
+                action: 'User added an artist',
+                label: options[0].name,
+            });
+
+            dispatch(addArtist(options[0]));
+            updateValue('');
+            setOptions([]);
+        }
     };
 
     return (
         <StyledAddArtistForm>
-            <StyledForm ref={formRef}>
+            <StyledForm autoComplete="off" onSubmit={handleSubmit}>
                 <StyledFormGroup>
                     <StyledFormLabel htmlFor="artist">
                         Add up to <span className="highlight">5</span> artists
@@ -80,39 +91,44 @@ const AddArtistForm: React.FC = () => {
 
                     <div className="search">
                         <StyledFormControl
-                            ref={inputRef}
                             id="artist"
                             disabled={artists.length >= 5}
                             type="text"
                             value={inputValue}
                             onChange={input => updateValue(input.target.value)}
                             placeholder="Search for an artists name"
+                            autoComplete="off"
                         />
 
-                        <ul>
-                            {loading && <li>Loading...</li>}
-                            {options.length > 0 &&
-                                !loading &&
-                                options.map((value, index) => (
+                        {options.length > 0 && (
+                            <ul className="autocomplete">
+                                {options.map(artist => (
                                     <li
-                                        key={value.id}
+                                        tabIndex={0}
+                                        key={artist.id}
                                         onClick={() => {
                                             ReactGA.event({
                                                 category: 'Artists',
                                                 action: 'User added an artist',
-                                                label: value.name,
+                                                label: artist.name,
                                             });
 
-                                            dispatch(addArtist(value));
+                                            dispatch(addArtist(artist));
                                             updateValue('');
-                                            inputRef.current?.focus();
                                             setOptions([]);
                                         }}
                                     >
-                                        {value.name}
+                                        {artist.images.length > 0 && (
+                                            <img
+                                                src={artist.images[0].url}
+                                                alt={`${artist.name}`}
+                                            />
+                                        )}
+                                        {artist.name}
                                     </li>
                                 ))}
-                        </ul>
+                            </ul>
+                        )}
 
                         <button type="submit">
                             <Search width="32" height="32" />

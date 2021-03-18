@@ -2,10 +2,12 @@ import { media } from 'styled-bootstrap-grid';
 import styled from 'styled-components';
 
 const StyledSelectedArtists = styled.div`
+    margin-top: -16px;
     margin-bottom: 24px;
 
     ${media.sm`
         margin-bottom: 48px;
+        margin-top: -28px;
     `}
 
     ol {
@@ -56,6 +58,12 @@ const StyledSelectedArtists = styled.div`
             width: 16px;
             height: 16px;
             fill: #fff;
+        }
+
+        &:hover {
+            svg {
+                fill: #ff3e13;
+            }
         }
     }
 

@@ -10,6 +10,47 @@ const StyledAddArtistForm = styled.div`
         }
     }
 
+    .autocomplete {
+        position: absolute;
+        top: calc(100% - 8px);
+        left: 0;
+        width: 100%;
+        height: 245px;
+        overflow: scroll;
+        list-style: none;
+        padding: 20px;
+        background-color: #000;
+        border: 1px solid #3b484d;
+        border-top-color: #14181a;
+        border-radius: 0 0 8px 8px;
+        z-index: 90;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        li {
+            display: flex;
+            align-items: center;
+            font-size: 18px;
+            margin-bottom: 20px;
+            cursor: pointer;
+
+            &:hover {
+                color: #87fa5f;
+            }
+        }
+
+        img {
+            width: 72px;
+            height: 72px;
+            display: block;
+            margin-right: 16px;
+        }
+    }
+
     button {
         position: absolute;
         top: 50%;

@@ -3,7 +3,7 @@ import { media } from 'styled-bootstrap-grid';
 
 const StyledLogo = styled.div`
     position: absolute;
-    top: 24px;
+    top: 36px;
     left: 24px;
     font-weight: 900;
     font-size: 24px;
