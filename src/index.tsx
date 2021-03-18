@@ -16,13 +16,7 @@ import { typography } from './styles/typography';
 
 LogRocket.init('bhxbik/detune', {
     network: {
-        requestSanitizer: request => {
-            if (request.url.includes('api.spotify.com')) {
-                return null;
-            }
-
-            return request;
-        },
+        isEnabled: false,
     },
 });
 
