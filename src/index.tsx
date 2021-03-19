@@ -14,21 +14,23 @@ import { persistor, store } from './store/store';
 import { gridTheme, theme } from './styles/theme';
 import { typography } from './styles/typography';
 
-LogRocket.init('bhxbik/detune', {
-    network: {
-        isEnabled: false,
-    },
-});
-
-ReactGA.initialize('UA-167595336-1');
-
-// Connect GA to LogRocket
-LogRocket.getSessionURL(function (sessionURL) {
-    ReactGA.event({
-        category: 'LogRocket',
-        action: sessionURL,
+if (process.env.NODE_ENV === 'production') {
+    LogRocket.init('bhxbik/detune', {
+        network: {
+            isEnabled: false,
+        },
     });
-});
+
+    ReactGA.initialize('UA-167595336-1');
+
+    // Connect GA to LogRocket
+    LogRocket.getSessionURL(function (sessionURL) {
+        ReactGA.event({
+            category: 'LogRocket',
+            action: sessionURL,
+        });
+    });
+}
 
 const GlobalStyle = createGlobalStyle`
     body {
