@@ -48,6 +48,24 @@ const StyledAddArtistForm = styled.div`
             height: 72px;
             display: block;
             margin-right: 16px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .no-image {
+            background-color: #14181a;
+            width: 72px;
+            height: 72px;
+            margin-right: 16px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            svg {
+                width: 36px;
+                fill: #7f7f7f;
+            }
         }
     }
 

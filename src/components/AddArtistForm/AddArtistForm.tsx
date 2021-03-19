@@ -5,6 +5,7 @@ import ReactGA from 'react-ga';
 import { useDispatch, useSelector } from 'react-redux';
 import SpotifyWebApi from 'spotify-web-api-js';
 import { ReactComponent as Search } from '../../static/svg/Search.svg';
+import { ReactComponent as Artist } from '../../static/svg/Artist.svg';
 import { addArtist } from '../../store/artistsSlice';
 import { RootState } from '../../store/reducers';
 import {
@@ -118,11 +119,15 @@ const AddArtistForm: React.FC = () => {
                                             setOptions([]);
                                         }}
                                     >
-                                        {artist.images.length > 0 && (
+                                        {artist.images.length > 0 ? (
                                             <img
                                                 src={artist.images[0].url}
                                                 alt={`${artist.name}`}
                                             />
+                                        ) : (
+                                            <div className="no-image">
+                                                <Artist />
+                                            </div>
                                         )}
                                         {artist.name}
                                     </li>

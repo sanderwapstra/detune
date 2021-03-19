@@ -85,6 +85,24 @@ const StyledSelectedArtists = styled.div`
         border-radius: 16px;
     }
 
+    .no-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #000;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        svg {
+            width: 72px;
+            fill: #7f7f7f;
+        }
+    }
+
     .placeholder {
         border-radius: 16px;
         height: 0;

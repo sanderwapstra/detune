@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ReactComponent as Close } from '../../static/svg/Close.svg';
+import { ReactComponent as Artist } from '../../static/svg/Artist.svg';
 import { removeArtist } from '../../store/artistsSlice';
 import { RootState } from '../../store/reducers';
 import StyledSelectedArtists from './SelectedArtists.styles';
@@ -13,13 +14,18 @@ const SelectedArtists: React.FC = () => {
         dispatch(removeArtist(id));
     };
 
-    const renderArtist = (artist: SpotifyApi.ArtistObjectFull) => (
-        <li key={artist.id}>
+    const renderArtist = (
+        artist: SpotifyApi.ArtistObjectFull,
+        index: number
+    ) => (
+        <li key={`${artist.id}-${index}`}>
             <div className="image">
                 {artist.images.length > 0 ? (
                     <img src={artist.images[0].url} alt={`${artist.name}`} />
                 ) : (
-                    <div className="no-image" />
+                    <div className="no-image">
+                        <Artist />
+                    </div>
                 )}
             </div>
             <div className="info">
@@ -51,7 +57,7 @@ const SelectedArtists: React.FC = () => {
     return (
         <StyledSelectedArtists>
             <ol>
-                {artists.map(artist => renderArtist(artist))}
+                {artists.map((artist, index) => renderArtist(artist, index))}
                 {renderPlaceholders()}
             </ol>
         </StyledSelectedArtists>
