@@ -16,6 +16,7 @@ import { typography } from './styles/typography';
 
 if (process.env.NODE_ENV === 'production') {
     LogRocket.init('bhxbik/detune', {
+        release: '1.0.1',
         network: {
             isEnabled: false,
         },
