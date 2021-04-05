@@ -49,33 +49,5 @@
     <body>
         <noscript>You need to enable JavaScript to run this app.</noscript>
         <div id="root"></div>
-
-        <script type="text/javascript">
-            var _TradeTrackerTagOptions = {
-                t: 'a',
-                s: '400965',
-                chk: '3c7e0a80119b6ae24d58d4c9a3aa6d16',
-                overrideOptions: {},
-            };
-
-            (function () {
-                var tt = document.createElement('script'),
-                    s = document.getElementsByTagName('script')[0];
-                tt.setAttribute('type', 'text/javascript');
-                tt.setAttribute(
-                    'src',
-                    (document.location.protocol == 'https:'
-                        ? 'https'
-                        : 'http') +
-                        '://tm.tradetracker.net/tag?t=' +
-                        _TradeTrackerTagOptions.t +
-                        '&amp;s=' +
-                        _TradeTrackerTagOptions.s +
-                        '&amp;chk=' +
-                        _TradeTrackerTagOptions.chk
-                );
-                s.parentNode.insertBefore(tt, s);
-            })();
-        </script>
     </body>
 </html>
