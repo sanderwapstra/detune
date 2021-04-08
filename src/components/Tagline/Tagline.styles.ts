@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { map } from 'styled-components-breakpoint';
 import { typography } from '../../styles/typography';
 import { media } from 'styled-bootstrap-grid';
+import { Colors } from '../../styles/colors';
 
 const StyledTagline = styled.h1`
     line-height: 1.25;
@@ -15,7 +16,7 @@ const StyledTagline = styled.h1`
     `}
 
     .highlight {
-        color: #87fa5f;
+        color: ${Colors.green};
     }
 `;
 

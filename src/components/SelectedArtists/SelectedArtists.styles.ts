@@ -1,5 +1,6 @@
 import { media } from 'styled-bootstrap-grid';
 import styled from 'styled-components';
+import { Colors } from '../../styles/colors';
 
 const StyledSelectedArtists = styled.div`
     margin-top: -16px;
@@ -42,7 +43,7 @@ const StyledSelectedArtists = styled.div`
     }
 
     .name {
-        color: #87fa5f;
+        color: ${Colors.green};
     }
 
     .remove {
@@ -57,12 +58,12 @@ const StyledSelectedArtists = styled.div`
         svg {
             width: 16px;
             height: 16px;
-            fill: #fff;
+            fill: ${Colors.white};
         }
 
         &:hover {
             svg {
-                fill: #ff3e13;
+                fill: ${Colors.red};
             }
         }
     }
@@ -91,7 +92,7 @@ const StyledSelectedArtists = styled.div`
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: #000;
+        background-color: ${Colors.grayscale1};
         border-radius: 16px;
         display: flex;
         align-items: center;
@@ -107,7 +108,7 @@ const StyledSelectedArtists = styled.div`
         border-radius: 16px;
         height: 0;
         padding-bottom: calc(33.33% - 16px);
-        border: 1px solid #3b484d;
+        border: 1px solid ${Colors.grayscale3};
 
         ${media.sm`
             padding-bottom: calc(20% - 32px);

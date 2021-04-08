@@ -1,6 +1,7 @@
 import { media } from 'styled-bootstrap-grid';
 import styled from 'styled-components';
 import { map } from 'styled-components-breakpoint';
+import { Colors } from '../../styles/colors';
 import { typography } from '../../styles/typography';
 
 const StyledForm = styled.form`
@@ -38,13 +39,13 @@ const StyledFormHelpText = styled.div`
 const StyledFormControl = styled.input`
     display: block;
     width: 100%;
-    background-color: #000;
-    border: 1px solid #3b484d;
+    background-color: ${Colors.grayscale1};
+    border: 1px solid ${Colors.grayscale3};
     border-radius: 8px;
     font-size: 20px;
     line-height: 1.25;
     padding: 16px 20px;
-    color: #fff;
+    color: ${Colors.white};
 
     ${media.sm`
         font-size: 24px;

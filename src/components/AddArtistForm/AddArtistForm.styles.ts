@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Colors } from '../../styles/colors';
 import { StyledFormControl } from '../Form/Form.styles';
 
 const StyledAddArtistForm = styled.div`
@@ -19,9 +20,9 @@ const StyledAddArtistForm = styled.div`
         overflow: scroll;
         list-style: none;
         padding: 20px;
-        background-color: #000;
-        border: 1px solid #3b484d;
-        border-top-color: #14181a;
+        background-color: ${Colors.grayscale1};
+        border: 1px solid ${Colors.grayscale3};
+        border-top-color: ${Colors.grayscale2};
         border-radius: 0 0 8px 8px;
         z-index: 90;
         scrollbar-width: none;
@@ -39,7 +40,7 @@ const StyledAddArtistForm = styled.div`
             cursor: pointer;
 
             &:hover {
-                color: #87fa5f;
+                color: ${Colors.green};
             }
         }
 
@@ -53,7 +54,7 @@ const StyledAddArtistForm = styled.div`
         }
 
         .no-image {
-            background-color: #14181a;
+            background-color: ${Colors.grayscale2};
             width: 72px;
             height: 72px;
             margin-right: 16px;
@@ -69,7 +70,7 @@ const StyledAddArtistForm = styled.div`
         }
     }
 
-    button {
+    .searchBtn {
         position: absolute;
         top: 50%;
         left: 20px;
@@ -81,12 +82,38 @@ const StyledAddArtistForm = styled.div`
 
         svg {
             display: block;
-            fill: #fff;
+            fill: ${Colors.white};
         }
     }
 
     .highlight {
-        color: #87fa5f;
+        color: ${Colors.green};
+    }
+
+    .swiper-slide {
+        width: auto;
+    }
+
+    .playlist {
+        display: block;
+        width: calc(1124px * 0.2 - 32px);
+        text-decoration: none;
+        font-size: 16px;
+        color: ${Colors.green};
+        margin-bottom: 24px;
+    }
+
+    .playlistImage {
+        max-width: 100%;
+        border-radius: 16px;
+        margin-bottom: 8px;
+    }
+
+    .playlistName {
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 `;
 

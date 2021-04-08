@@ -5,6 +5,7 @@ import Modal from 'react-modal';
 import { useSelector } from 'react-redux';
 import SpotifyWebApi from 'spotify-web-api-js';
 import { RootState } from '../../store/reducers';
+import { Colors } from '../../styles/colors';
 import Button from '../Button/Button';
 import StyledGeneratePlaylist from './GeneratePlaylist.styles';
 
@@ -147,7 +148,7 @@ const GeneratePlaylist: React.FC = () => {
                     },
                     content: {
                         borderRadius: '16px',
-                        background: '#000',
+                        background: Colors.grayscale1,
                         border: 0,
                         maxWidth: '620px',
                         padding: '32px',

@@ -1,6 +1,7 @@
 import { media } from 'styled-bootstrap-grid';
 import styled from 'styled-components';
 import { map } from 'styled-components-breakpoint';
+import { Colors } from '../../styles/colors';
 import { typography } from '../../styles/typography';
 
 const StyledProfile = styled.div`
@@ -13,7 +14,7 @@ const StyledProfile = styled.div`
     `}
 
     .highlight {
-        color: #87fa5f;
+        color: ${Colors.green};
     }
 `;
 

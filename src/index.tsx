@@ -11,6 +11,7 @@ import { Normalize } from 'styled-normalize';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { persistor, store } from './store/store';
+import { Colors } from './styles/colors';
 import { gridTheme, theme } from './styles/theme';
 import { typography } from './styles/typography';
 
@@ -37,8 +38,8 @@ const GlobalStyle = createGlobalStyle`
     body {
         font-family: 'Nunito', sans-serif;
         font-weight: 600;
-        background-color: #14181a;
-        color: #fff;
+        background-color: ${Colors.grayscale2};
+        color: ${Colors.white};
     }
 
     h1,

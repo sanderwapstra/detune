@@ -1,8 +1,9 @@
 import styled from 'styled-components';
+import { Colors } from '../../styles/colors';
 
 const StyledTrackAttributeRange = styled.div`
     position: relative;
-    border: 1px solid #667780;
+    border: 1px solid ${Colors.grayscale4};
     padding: 20px 32px;
     border-radius: 16px;
 
@@ -11,7 +12,7 @@ const StyledTrackAttributeRange = styled.div`
         top: 0;
         left: 16px;
         transform: translateY(-50%);
-        background-color: #14181a;
+        background-color: ${Colors.grayscale2};
         padding: 0 16px;
 
         input {
@@ -19,7 +20,7 @@ const StyledTrackAttributeRange = styled.div`
             left: -9999px;
 
             &:checked + label {
-                color: #87fa5f;
+                color: ${Colors.green};
 
                 svg {
                     opacity: 1;
@@ -34,13 +35,13 @@ const StyledTrackAttributeRange = styled.div`
                 transform: translateY(-50%);
                 width: 20px;
                 height: 20px;
-                background-color: #fff;
+                background-color: ${Colors.white};
                 border-radius: 4px;
                 transition: background-color 0.15s ease-in-out;
             }
 
             &:checked + label::before {
-                background-color: #87fa5f;
+                background-color: ${Colors.green};
             }
         }
 
@@ -58,7 +59,7 @@ const StyledTrackAttributeRange = styled.div`
                 transform: translateY(-50%);
                 width: 16px;
                 height: 16px;
-                fill: #000;
+                fill: ${Colors.grayscale1};
                 opacity: 0;
                 transition: opacity 0.15s ease-in-out;
             }
@@ -71,17 +72,17 @@ const StyledTrackAttributeRange = styled.div`
         height: 40px;
         background: linear-gradient(
             90deg,
-            #87fa5f 0%,
-            #87fa5f 25%,
-            #87fa5f 50%,
-            #fcbb13 75%,
-            #ff3e13 100%
+            ${Colors.green} 0%,
+            ${Colors.green} 25%,
+            ${Colors.green} 50%,
+            ${Colors.yellow} 75%,
+            ${Colors.red} 100%
         );
         padding: 0 12px;
         overflow: hidden;
 
         &.is-disabled {
-            background: #667780;
+            background: ${Colors.grayscale4};
 
             .range-background-inner {
                 border-color: #7a8f99;
@@ -106,7 +107,7 @@ const StyledTrackAttributeRange = styled.div`
         left: 1px;
         width: calc(100% - 2px);
         height: calc(100% - 2px);
-        border: 4px solid #fff;
+        border: 4px solid ${Colors.white};
         border-radius: 4px;
         box-shadow: 0 0 0 1px #ededed;
     }
@@ -135,7 +136,7 @@ const StyledTrackAttributeRange = styled.div`
             position: absolute;
             height: 16px;
             width: 100vw;
-            background-color: #14181a;
+            background-color: ${Colors.grayscale2};
         }
 
         &::before {

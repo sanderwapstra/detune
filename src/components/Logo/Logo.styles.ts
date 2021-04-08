@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { media } from 'styled-bootstrap-grid';
+import { Colors } from '../../styles/colors';
 
 const StyledLogo = styled.div`
     position: absolute;
@@ -7,7 +8,7 @@ const StyledLogo = styled.div`
     left: 24px;
     font-weight: 900;
     font-size: 24px;
-    color: #87fa5f;
+    color: ${Colors.green};
 
     ${media.sm`
         top: 60px;
