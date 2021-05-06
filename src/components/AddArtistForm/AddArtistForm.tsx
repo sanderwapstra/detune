@@ -4,15 +4,14 @@ import React, { useCallback, useRef, useState } from 'react';
 import ReactGA from 'react-ga';
 import { useDispatch, useSelector } from 'react-redux';
 import SpotifyWebApi from 'spotify-web-api-js';
-import { ReactComponent as Search } from '../../static/svg/Search.svg';
 import { ReactComponent as Artist } from '../../static/svg/Artist.svg';
+import { ReactComponent as Search } from '../../static/svg/Search.svg';
 import { addArtist } from '../../store/artistsSlice';
 import { RootState } from '../../store/reducers';
 import {
     StyledForm,
     StyledFormControl,
     StyledFormGroup,
-    StyledFormHelpText,
     StyledFormLabel,
 } from '../Form/Form.styles';
 import StyledAddArtistForm from './AddArtistForm.styles';
@@ -78,17 +77,6 @@ const AddArtistForm: React.FC = () => {
                     <StyledFormLabel htmlFor="artist">
                         Add up to <span className="highlight">5</span> artists
                     </StyledFormLabel>
-                    <StyledFormHelpText>
-                        Need some inspiration? How about exploring{' '}
-                        <a href="/#" className="highlight">
-                            Mexico City&rsquo;s Acid House
-                        </a>{' '}
-                        or{' '}
-                        <a href="/#" className="highlight">
-                            Ireland&rsquo;s Hip-Hop Scene
-                        </a>
-                        ?
-                    </StyledFormHelpText>
 
                     <div className="search">
                         <StyledFormControl
