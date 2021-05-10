@@ -17,6 +17,7 @@
         "await-to-js": "^2.1.1",
         "lodash.debounce": "^4.0.8",
         "logrocket": "^1.0.7",
+        "merge-images": "^2.0.0",
         "query-string": "^6.12.1",
         "react": "^16.13.1",
         "react-dom": "^16.13.1",
@@ -58,6 +59,7 @@
     },
     "devDependencies": {
         "@types/lodash.debounce": "^4.0.6",
+        "@types/merge-images": "^1.2.0",
         "@types/react-modal": "^3.12.0"
     }
 }

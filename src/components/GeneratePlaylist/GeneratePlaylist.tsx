@@ -1,4 +1,5 @@
 import to from 'await-to-js';
+import mergeImages from 'merge-images';
 import React, { useRef, useState } from 'react';
 import ReactGA from 'react-ga';
 import Modal from 'react-modal';
@@ -70,7 +71,7 @@ const GeneratePlaylist: React.FC = () => {
         playlist: SpotifyApi.CreatePlaylistResponse,
         recommendations: SpotifyApi.RecommendationsFromSeedsResponse
     ) => {
-        const [err] = await to(
+        const [err, val] = await to(
             spotifyApi.current.addTracksToPlaylist(
                 playlist.id,
                 recommendations.tracks.map(track => track.uri)
@@ -81,6 +82,26 @@ const GeneratePlaylist: React.FC = () => {
             console.error(`❌ Adding track to playlist failed: ${err}`);
         } else {
             openModal();
+
+            const [err, response] = await to(
+                spotifyApi.current.getPlaylistCoverImage(playlist.id)
+            );
+
+            if (response && response.length > 0) {
+                mergeImages(
+                    [
+                        response[0].url,
+                        `${process.env.PUBLIC_URL}/artwork/mask.png`,
+                        `${process.env.PUBLIC_URL}/artwork/logo.png`,
+                    ],
+                    { format: 'image/jpeg', crossOrigin: 'anonymous' }
+                ).then(b64 => {
+                    spotifyApi.current.uploadCustomPlaylistCoverImage(
+                        playlist.id,
+                        b64
+                    );
+                });
+            }
         }
     };
 

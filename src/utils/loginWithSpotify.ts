@@ -10,7 +10,7 @@ export const loginWithSpotify = () => {
     const state = uuidv4();
     localStorage.setItem('stateKey', state);
 
-    const scopes = 'playlist-modify-public';
+    const scopes = 'playlist-modify-public ugc-image-upload';
     const redirectUrl =
         process.env.NODE_ENV === 'development'
             ? 'https://localhost:3000/'
