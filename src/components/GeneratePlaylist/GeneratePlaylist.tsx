@@ -71,7 +71,7 @@ const GeneratePlaylist: React.FC = () => {
         playlist: SpotifyApi.CreatePlaylistResponse,
         recommendations: SpotifyApi.RecommendationsFromSeedsResponse
     ) => {
-        const [err, val] = await to(
+        const [err] = await to(
             spotifyApi.current.addTracksToPlaylist(
                 playlist.id,
                 recommendations.tracks.map(track => track.uri)
@@ -86,6 +86,12 @@ const GeneratePlaylist: React.FC = () => {
             const [err, response] = await to(
                 spotifyApi.current.getPlaylistCoverImage(playlist.id)
             );
+
+            if (err) {
+                console.error(
+                    `❌ Getting default playlist cover failed: ${err}`
+                );
+            }
 
             if (response && response.length > 0) {
                 mergeImages(
