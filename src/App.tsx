@@ -6,6 +6,7 @@ import SpotifyWebApi from 'spotify-web-api-js';
 import { Col, Container, Row } from 'styled-bootstrap-grid';
 import StyledApp from './App.styles';
 import AddArtistForm from './components/AddArtistForm/AddArtistForm';
+import Footer from './components/Footer/Footer';
 import GeneratePlaylist from './components/GeneratePlaylist/GeneratePlaylist';
 import Login from './components/Login/Login';
 import Logo from './components/Logo/Logo';
@@ -98,6 +99,8 @@ function App() {
                     </Row>
                 )}
             </Container>
+
+            <Footer />
         </StyledApp>
     );
 }

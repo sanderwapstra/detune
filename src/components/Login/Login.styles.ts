@@ -6,10 +6,10 @@ const StyledLogin = styled.div`
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    padding: 120px 0;
+    padding: 100px 0 60px;
 
     ${media.sm`
-        min-height: 100vh;
+        padding: 80px 0;
     `}
 `;
 
