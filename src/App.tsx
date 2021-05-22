@@ -12,6 +12,7 @@ import Login from './components/Login/Login';
 import Logo from './components/Logo/Logo';
 import PlaylistName from './components/PlaylistName/PlaylistName';
 import Profile from './components/Profile/Profile';
+import Screencast from './components/Screencast/Screencast';
 import SelectedArtists from './components/SelectedArtists/SelectedArtists';
 import TuneTrackAttributes from './components/TuneTrackAttributes/TuneTrackAttributes';
 import { resetUser, setToken, setUser } from './store/appSlice';
@@ -92,11 +93,14 @@ function App() {
                         </Col>
                     </Row>
                 ) : (
-                    <Row>
-                        <Col md={10} mdOffset={1}>
-                            <Login />
-                        </Col>
-                    </Row>
+                    <>
+                        <Screencast />
+                        <Row>
+                            <Col md={10} mdOffset={1}>
+                                <Login />
+                            </Col>
+                        </Row>
+                    </>
                 )}
             </Container>
 
