@@ -99,6 +99,9 @@ const GeneratePlaylist: React.FC<Props> = ({ onPlaylistReady }) => {
             }
 
             onPlaylistReady(playlist.uri);
+
+            // Scroll to top
+            window.scrollTo(0, 0);
         }
     };
 

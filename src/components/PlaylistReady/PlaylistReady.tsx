@@ -1,33 +1,26 @@
 import React from 'react';
-import useScript from '../../utils/useScript';
+import { gear } from '../../data/gear';
 import Button from '../Button/Button';
+import ProductList from '../ProductList/ProductList';
 import StyledPlaylistReady from './PlaylistReady.styles';
 
 type Props = {
     playlistUri: string;
 };
 
-const PlaylistReady: React.FC<Props> = ({ playlistUri }) => {
-    useScript(
-        `//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&adInstanceId=95f4ba12-6b77-49af-8a99-b25757714f35`
-    );
+const PlaylistReady: React.FC<Props> = ({ playlistUri }) => (
+    <StyledPlaylistReady>
+        <div className="cta">
+            <h2>Your playlist is ready!</h2>
+            <Button href={playlistUri}>Open Spotify</Button>
+        </div>
 
-    return (
-        <StyledPlaylistReady>
-            <div className="cta">
-                <h2>Your playlist is ready!</h2>
-                <Button href={playlistUri}>Open Spotify</Button>
-            </div>
-
-            {/* <ProductList
+        <ProductList
             title="Need some new gear to enjoy your playlist?"
             items={gear}
             moreUrl="https://amzn.to/3uggAOa"
-        /> */}
-
-            <div id="amzn-assoc-ad-95f4ba12-6b77-49af-8a99-b25757714f35"></div>
-        </StyledPlaylistReady>
-    );
-};
+        />
+    </StyledPlaylistReady>
+);
 
 export default PlaylistReady;

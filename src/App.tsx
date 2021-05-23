@@ -86,13 +86,11 @@ function App() {
             <Container>
                 {token && user ? (
                     playlistUri ? (
-                        <>
-                            <Row>
-                                <Col>
-                                    <PlaylistReady playlistUri={playlistUri} />
-                                </Col>
-                            </Row>
-                        </>
+                        <Row>
+                            <Col>
+                                <PlaylistReady playlistUri={playlistUri} />
+                            </Col>
+                        </Row>
                     ) : (
                         <Row>
                             <Col>
