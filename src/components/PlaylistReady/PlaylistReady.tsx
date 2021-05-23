@@ -8,7 +8,7 @@ type Props = {
 };
 
 const PlaylistReady: React.FC<Props> = ({ playlistUri }) => {
-    const status = useScript(
+    useScript(
         `//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&adInstanceId=95f4ba12-6b77-49af-8a99-b25757714f35`
     );
 
