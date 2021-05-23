@@ -80,10 +80,6 @@ const GlobalStyle = createGlobalStyle`
         line-height: 1.5;
         margin-bottom: 12px;
     }
-
-    .ReactModal__Body--open #root {
-        filter: blur(2px);
-    }
 `;
 
 ReactDOM.render(

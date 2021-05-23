@@ -1,19 +1,18 @@
 import to from 'await-to-js';
 import mergeImages from 'merge-images';
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import ReactGA from 'react-ga';
-import Modal from 'react-modal';
 import { useSelector } from 'react-redux';
 import SpotifyWebApi from 'spotify-web-api-js';
 import { RootState } from '../../store/reducers';
 import Button from '../Button/Button';
 import StyledGeneratePlaylist from './GeneratePlaylist.styles';
 
-Modal.setAppElement('#root');
+type Props = {
+    onPlaylistReady: (uri: string) => void;
+};
 
-const GeneratePlaylist: React.FC = () => {
-    const [modalIsOpen, setModalIsOpen] = useState(false);
-    const [playlistUri, setPlaylistUri] = useState('');
+const GeneratePlaylist: React.FC<Props> = ({ onPlaylistReady }) => {
     const spotifyApi = useRef(new SpotifyWebApi());
     const { user } = useSelector((state: RootState) => state.app);
     const artists = useSelector((state: RootState) => state.artists);
@@ -21,14 +20,6 @@ const GeneratePlaylist: React.FC = () => {
         (state: RootState) => state.trackAttributes
     );
     const { name } = useSelector((state: RootState) => state.playlist);
-
-    const openModal = () => {
-        setModalIsOpen(true);
-    };
-
-    const closeModal = () => {
-        setModalIsOpen(false);
-    };
 
     const getPlayListTitle = () => {
         return name ? `${name} :: Detune.it` : 'Playlist by Detune.it';
@@ -81,8 +72,6 @@ const GeneratePlaylist: React.FC = () => {
         if (err) {
             console.error(`❌ Adding track to playlist failed: ${err}`);
         } else {
-            openModal();
-
             const [err, response] = await to(
                 spotifyApi.current.getPlaylistCoverImage(playlist.id)
             );
@@ -108,6 +97,8 @@ const GeneratePlaylist: React.FC = () => {
                     );
                 });
             }
+
+            onPlaylistReady(playlist.uri);
         }
     };
 
@@ -149,7 +140,6 @@ const GeneratePlaylist: React.FC = () => {
             const playlist = await createPlaylist();
 
             if (playlist) {
-                setPlaylistUri(playlist.uri);
                 addTracksToPlaylist(playlist, recommendations);
             }
         }
@@ -160,33 +150,6 @@ const GeneratePlaylist: React.FC = () => {
             <Button disabled={!artists.length} click={getRecommendations}>
                 Generate playlist
             </Button>
-
-            <Modal
-                isOpen={modalIsOpen}
-                onRequestClose={closeModal}
-                contentLabel="Open Spotify modal"
-                style={{
-                    overlay: {
-                        backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                    },
-                    content: {
-                        borderRadius: '16px',
-                        background: '#000',
-                        border: 0,
-                        maxWidth: '620px',
-                        padding: '32px',
-                        margin: 'auto',
-                        inset: 'auto 32px',
-                        textAlign: 'center',
-                    },
-                }}
-            >
-                <h3>Your playlist is ready</h3>
-                <Button href={playlistUri}>Open Spotify</Button>
-            </Modal>
         </StyledGeneratePlaylist>
     );
 };

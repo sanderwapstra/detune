@@ -1,6 +1,6 @@
 import to from 'await-to-js';
 import queryString from 'query-string';
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import SpotifyWebApi from 'spotify-web-api-js';
 import { Col, Container, Row } from 'styled-bootstrap-grid';
@@ -11,6 +11,7 @@ import GeneratePlaylist from './components/GeneratePlaylist/GeneratePlaylist';
 import Login from './components/Login/Login';
 import Logo from './components/Logo/Logo';
 import PlaylistName from './components/PlaylistName/PlaylistName';
+import PlaylistReady from './components/PlaylistReady/PlaylistReady';
 import Profile from './components/Profile/Profile';
 import Screencast from './components/Screencast/Screencast';
 import SelectedArtists from './components/SelectedArtists/SelectedArtists';
@@ -22,6 +23,8 @@ function App() {
     const dispatch = useDispatch();
     const spotifyApi = useRef(new SpotifyWebApi());
     const { token, user } = useSelector((state: RootState) => state.app);
+    const [playlistUri, setPlaylistUri] =
+        useState<string | undefined>(undefined);
 
     const clearUser = useCallback(() => {
         dispatch(resetUser());
@@ -36,7 +39,7 @@ function App() {
             );
             const storedState = localStorage.getItem('stateKey');
 
-            if (access_token && (state == null || state !== storedState)) {
+            if (access_token && (state === null || state !== storedState)) {
                 clearUser();
 
                 console.error('❌ Authentication failed');
@@ -82,16 +85,28 @@ function App() {
 
             <Container>
                 {token && user ? (
-                    <Row>
-                        <Col>
-                            <Profile />
-                            <PlaylistName />
-                            <AddArtistForm />
-                            <SelectedArtists />
-                            <TuneTrackAttributes />
-                            <GeneratePlaylist />
-                        </Col>
-                    </Row>
+                    playlistUri ? (
+                        <>
+                            <Row>
+                                <Col>
+                                    <PlaylistReady playlistUri={playlistUri} />
+                                </Col>
+                            </Row>
+                        </>
+                    ) : (
+                        <Row>
+                            <Col>
+                                <Profile />
+                                <PlaylistName />
+                                <AddArtistForm />
+                                <SelectedArtists />
+                                <TuneTrackAttributes />
+                                <GeneratePlaylist
+                                    onPlaylistReady={uri => setPlaylistUri(uri)}
+                                />
+                            </Col>
+                        </Row>
+                    )
                 ) : (
                     <>
                         <Screencast />
