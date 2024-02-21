@@ -15,11 +15,11 @@ const PlaylistReady: React.FC<Props> = ({ playlistUri }) => (
             <Button href={playlistUri}>Open Spotify</Button>
         </div>
 
-        <ProductList
+        {/* <ProductList
             title="Need some new gear to enjoy your playlist?"
             items={gear}
             moreUrl="https://amzn.to/3uggAOa"
-        />
+        /> */}
     </StyledPlaylistReady>
 );
 
