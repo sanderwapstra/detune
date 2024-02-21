@@ -14,12 +14,6 @@ const PlaylistReady: React.FC<Props> = ({ playlistUri }) => (
             <h2>Your playlist is ready!</h2>
             <Button href={playlistUri}>Open Spotify</Button>
         </div>
-
-        {/* <ProductList
-            title="Need some new gear to enjoy your playlist?"
-            items={gear}
-            moreUrl="https://amzn.to/3uggAOa"
-        /> */}
     </StyledPlaylistReady>
 );
 
