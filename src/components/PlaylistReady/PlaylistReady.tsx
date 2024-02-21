@@ -1,7 +1,5 @@
 import React from 'react';
-import { gear } from '../../data/gear';
 import Button from '../Button/Button';
-import ProductList from '../ProductList/ProductList';
 import StyledPlaylistReady from './PlaylistReady.styles';
 
 type Props = {
